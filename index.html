@@ -6,6 +6,8 @@
 <title data-i18n="meta.title">NanoPOS — Bán hàng thông minh & Thanh toán VietQR tức thì</title>
 <meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="NanoPOS là ứng dụng điểm bán hàng (POS) offline-first cho quán cà phê, cửa hàng bán lẻ và hộ kinh doanh Việt Nam. Thanh toán VietQR động, đồng bộ Google Sheets, trợ lý AI Gemini. Xây dựng bằng Flutter, chạy trên Android & iOS.">
 <meta name="theme-color" content="#0F766E">
+<link rel="icon" type="image/png" href="assets/icon/app_icon.png">
+<link rel="apple-touch-icon" href="assets/icon/app_icon_ios.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
@@ -67,8 +69,9 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.025em;font-weight:800}
 header.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--border)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--maxw);margin:0 auto;padding:0 24px}
 .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.18rem;letter-spacing:-.03em}
-.logo{width:36px;height:36px;border-radius:11px;background:var(--grad-hero);display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-teal)}
+.logo{width:36px;height:36px;border-radius:11px;overflow:hidden;display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-teal)}
 .logo svg{width:21px;height:21px}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-links a{padding:8px 14px;border-radius:10px;font-size:.93rem;font-weight:500;color:var(--text-2);transition:.15s}
 .nav-links a:hover{background:var(--surface-2);color:var(--text)}
@@ -125,6 +128,7 @@ header.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--
 .phone::before{content:"";position:absolute;top:11px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:#0b1220;border-radius:0 0 16px 16px;z-index:5}
 :root[data-theme="dark"] .phone::before{background:#05080f}
 .screen{position:relative;border-radius:33px;overflow:hidden;background:#F6F8FB;height:600px;display:flex;flex-direction:column}
+.screen .shot{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 /* status bar */
 .sbar{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 6px;font-size:.72rem;font-weight:700;color:#334155;background:#fff}
 .sbar .dots{display:flex;gap:4px;align-items:center}
@@ -355,7 +359,7 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
   <div class="nav-inner">
     <a href="#top" class="brand">
       <span class="logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+        <img src="assets/icon/app_icon_ios.png" alt="NanoPOS" width="36" height="36">
       </span>
       NanoPOS
     </a>
@@ -408,31 +412,10 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
     </div>
     <div class="hero-visual reveal" data-delay="1">
       <div class="blob"></div>
-      <!-- SALE SCREEN MOCKUP -->
+      <!-- SALE SCREEN -->
       <div class="phone">
         <div class="screen">
-          <div class="sbar"><span>9:41</span><div class="dots"><i></i><i></i><i></i><span style="margin-left:4px">5G</span></div></div>
-          <div class="appbar">
-            <div class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg> <span data-i18n="mock.sale">Bán Hàng</span></div>
-            <div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-          </div>
-          <div class="sbody">
-            <div class="s-search">
-              <div class="s-input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span data-i18n="mock.searchProd">Tìm sản phẩm hoặc SKU...</span></div>
-              <div class="s-qr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 20h1M17 20v1"/></svg></div>
-            </div>
-            <div class="chips"><span class="chip on" data-i18n="mock.all">Tất cả</span><span class="chip" data-i18n="mock.drinks">Đồ uống</span><span class="chip" data-i18n="mock.tea">Trà</span><span class="chip" data-i18n="mock.food">Thức ăn</span></div>
-            <div class="pgrid">
-              <div class="pcard"><div class="thumb" style="background:linear-gradient(135deg,#0F766E,#0369A1)">☕</div><span class="tag" data-i18n="mock.drinks">Đồ uống</span><div class="nm" data-i18n="mock.p1">Cà phê sữa đá</div><div class="row"><span class="pr">25.000 đ</span><span class="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div></div>
-              <div class="pcard"><div class="thumb" style="background:linear-gradient(135deg,#D97706,#f59e0b)">🍑</div><span class="tag" data-i18n="mock.tea">Trà</span><div class="nm" data-i18n="mock.p2">Trà đào cam sả</div><div class="row"><span class="pr">35.000 đ</span><span class="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div></div>
-              <div class="pcard"><div class="thumb" style="background:linear-gradient(135deg,#7c3aed,#db2777)">🧋</div><span class="tag" data-i18n="mock.tea">Trà</span><div class="nm" data-i18n="mock.p3">Trà sữa trân châu</div><div class="row"><span class="pr">40.000 đ</span><span class="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div></div>
-              <div class="pcard"><div class="thumb" style="background:linear-gradient(135deg,#059669,#0369A1)">🥖</div><span class="tag" data-i18n="mock.food">Thức ăn</span><div class="nm" data-i18n="mock.p4">Bánh mì đặc biệt</div><div class="row"><span class="pr">25.000 đ</span><span class="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div></div>
-            </div>
-            <div class="cartbar">
-              <div class="l"><span class="cc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.5 12h11l2-8H6"/></svg><b>3</b></span> <span data-i18n="mock.viewCart">Xem giỏ · Đơn 1</span></div>
-              <div class="tot">100.000 đ</div>
-            </div>
-          </div>
+          <img src="assets/sale_screen.PNG" alt="Màn hình bán hàng NanoPOS" loading="eager" class="shot">
         </div>
       </div>
     </div>
@@ -484,17 +467,9 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
       </ul>
     </div>
     <div class="qr-visual reveal" data-delay="1">
-      <div class="receipt">
-        <div class="shop" data-i18n="qr.shop">Cửa Hàng Demo Coffee</div>
-        <div class="htitle" data-i18n="qr.rTitle">MÃ THANH TOÁN VIETQR</div>
-        <div class="qrbox"><div class="qrmark"></div></div>
-        <div class="amt">85.000 đ</div>
-        <div class="memo" data-i18n="qr.memo">Nội dung: HD1024</div>
-        <hr class="dash">
-        <div class="meta" data-i18n="qr.meta" data-i18n-html>
-          Ngân hàng: <b>MB Bank</b><br>
-          Số tài khoản: <b>0987654321</b><br>
-          Chủ TK: <b>NGUYEN KHAC LINH</b>
+      <div class="phone">
+        <div class="screen">
+          <img src="assets/qr_detail.PNG" alt="Chi tiết mã thanh toán VietQR trong NanoPOS" loading="lazy" class="shot">
         </div>
       </div>
     </div>
@@ -514,33 +489,7 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
       <!-- REPORT -->
       <div class="gcol reveal">
         <div class="phone"><div class="screen">
-          <div class="sbar"><span>9:41</span><div class="dots"><i></i><i></i><i></i><span style="margin-left:4px">5G</span></div></div>
-          <div class="appbar"><div class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 4-6"/></svg> <span data-i18n="mock.report">Báo Cáo</span></div><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div></div>
-          <div class="sbody" style="overflow-y:auto">
-            <div class="tabsw"><span class="t on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span data-i18n="mock.reportTab">Báo cáo</span></span><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h14a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/></svg><span data-i18n="mock.debtTab">Sổ nợ</span></span></div>
-            <div class="seg"><span class="on" data-i18n="mock.today">Hôm nay</span><span data-i18n="mock.yesterday">Hôm qua</span><span data-i18n="mock.7days">7 ngày</span><span data-i18n="mock.all">Tất cả</span></div>
-            <div class="stat2">
-              <div class="scard"><div class="h"><span data-i18n="mock.revenue">TỔNG DOANH THU</span><svg viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v4h-4"/></svg></div><div class="v">4.850.000đ</div></div>
-              <div class="scard"><div class="h"><span data-i18n="mock.orders">SỐ ĐƠN HÀNG</span><svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="2"><path d="M6 2l1 4h13l-1.5 8H8L6 2zM4 2H2"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></div><div class="v" data-i18n="mock.ordersVal">42 đơn</div></div>
-              <div class="scard"><div class="h"><span data-i18n="mock.cash">TIỀN MẶT</span><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg></div><div class="v">2.180.000đ</div></div>
-              <div class="scard"><div class="h"><span data-i18n="mock.qrTransfer">VIETQR CK</span><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3"/></svg></div><div class="v">2.670.000đ</div></div>
-            </div>
-            <div class="chart">
-              <div class="ch-h"><div class="lft"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span data-i18n="mock.revToday">Doanh Thu Hôm Nay</span></div><div class="pill">4.850.000đ</div></div>
-              <div class="bars">
-                <div class="b"><div class="bar" style="height:16%"></div><div class="xl">0-4h</div></div>
-                <div class="b"><div class="bar" style="height:28%"></div><div class="xl">4-8h</div></div>
-                <div class="b on"><div class="bar" style="height:100%"></div><div class="xl">8-12h</div></div>
-                <div class="b"><div class="bar" style="height:78%"></div><div class="xl">12-16h</div></div>
-                <div class="b"><div class="bar" style="height:70%"></div><div class="xl">16-20h</div></div>
-                <div class="b"><div class="bar" style="height:34%"></div><div class="xl">20-24h</div></div>
-              </div>
-            </div>
-            <div class="list-h" data-i18n="mock.history">Lịch Sử Giao Dịch (42)</div>
-            <div class="txn"><div class="l"><div class="top"><span class="id" data-i18n="mock.order1042">Đơn #1042</span><span class="badge qr">VIETQR</span></div><div class="tm">14:32 · 09/07/2026</div></div><div class="amt">85.000đ</div></div>
-            <div class="txn"><div class="l"><div class="top"><span class="id" data-i18n="mock.order1041">Đơn #1041</span><span class="badge cash" data-i18n="mock.cashBadge">TIỀN MẶT</span></div><div class="tm">14:20 · 09/07/2026</div></div><div class="amt">120.000đ</div></div>
-            <div class="txn"><div class="l"><div class="top"><span class="id" data-i18n="mock.order1040">Đơn #1040</span><span class="badge cash" data-i18n="mock.cashBadge">TIỀN MẶT</span></div><div class="tm">13:58 · 09/07/2026</div></div><div class="amt">45.000đ</div></div>
-          </div>
+          <img src="assets/report_screen.PNG" alt="Màn hình báo cáo doanh thu NanoPOS" loading="lazy" class="shot">
         </div></div>
         <div class="gcap"><b data-i18n="gallery.cap1t">Báo cáo &amp; Phân tích</b><span data-i18n="gallery.cap1d">Doanh thu, biểu đồ, lịch sử đơn</span></div>
       </div>
@@ -548,19 +497,7 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
       <!-- AI -->
       <div class="gcol reveal" data-delay="1">
         <div class="phone"><div class="screen">
-          <div class="sbar"><span>9:41</span><div class="dots"><i></i><i></i><i></i><span style="margin-left:4px">5G</span></div></div>
-          <div class="appbar"><div class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 19v3M4 12H2M22 12h-2"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="mock.aiAssistant">Trợ Lý AI</span></div><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2 4 4 .6-3 3 .8 4L12 12l-3.6 2.6.8-4-3-3 4-.6z"/></svg></div></div>
-          <div class="sbody" style="overflow-y:auto;padding-bottom:60px">
-            <div class="ai-sug">
-              <div class="s"><div class="ic" style="background:rgba(15,118,110,.14);color:#0F766E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div><span data-i18n="mock.sug1">Phân tích doanh số</span></div>
-              <div class="s"><div class="ic" style="background:rgba(3,105,161,.14);color:#0369A1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span data-i18n="mock.sug2">Mẫu nhắc nợ</span></div>
-              <div class="s"><div class="ic" style="background:rgba(217,119,6,.14);color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2 4 4 .6-3 3 .8 4L12 12l-3.6 2.6.8-4-3-3 4-.6z"/></svg></div><span data-i18n="mock.sug3">Gợi ý khuyến mãi</span></div>
-            </div>
-            <div class="bubble ai" data-i18n="mock.aiHello">Xin chào! Tôi là Trợ lý AI NanoPOS. Tôi có thể giúp gì cho hoạt động kinh doanh của bạn hôm nay?</div>
-            <div class="bubble me" data-i18n="mock.aiAsk">Tuần này sản phẩm nào bán chạy nhất?</div>
-            <div class="bubble ai" data-i18n="mock.aiReply" data-i18n-html>Trong 7 ngày qua có <b>142 đơn</b>, doanh thu <b>8.760.000 đ</b>. Top 3 bán chạy:<br>1. Trà sữa trân châu — 96 ly<br>2. Cà phê sữa đá — 88 ly<br>3. Trà đào cam sả — 54 ly</div>
-            <div class="ai-input"><div class="f" data-i18n="mock.aiInput">Đặt câu hỏi cho Trợ lý AI...</div><div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></div></div>
-          </div>
+          <img src="assets/assitant_screen.PNG" alt="Màn hình Trợ lý AI Gemini trong NanoPOS" loading="lazy" class="shot">
         </div></div>
         <div class="gcap"><b data-i18n="gallery.cap2t">Trợ lý AI Gemini</b><span data-i18n="gallery.cap2d">Phân tích kinh doanh bằng tiếng Việt</span></div>
       </div>
@@ -568,17 +505,7 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
       <!-- PRODUCTS -->
       <div class="gcol reveal" data-delay="2">
         <div class="phone"><div class="screen">
-          <div class="sbar"><span>9:41</span><div class="dots"><i></i><i></i><i></i><span style="margin-left:4px">5G</span></div></div>
-          <div class="appbar"><div class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/></svg> <span data-i18n="mock.products">Sản Phẩm</span></div><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div></div>
-          <div class="sbody" style="overflow-y:auto">
-            <div class="s-search"><div class="s-input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span data-i18n="mock.searchByName">Tìm theo tên, nhóm, SKU...</span></div></div>
-            <div class="prow"><div class="th" style="background:linear-gradient(135deg,#7c3aed,#db2777)">🧋</div><div class="info"><div class="nr"><span class="nm" data-i18n="mock.p3">Trà sữa trân châu</span><span class="tag-sm" data-i18n="mock.drinks">Đồ uống</span></div><div class="sku">SKU: TS001</div><div class="br"><span class="pr">35.000 đ</span><span class="stk ok" data-i18n="mock.stock120">Tồn kho: 120</span></div></div><div class="acts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4h-5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div></div>
-            <div class="prow"><div class="th" style="background:linear-gradient(135deg,#0F766E,#0369A1)">☕</div><div class="info"><div class="nr"><span class="nm" data-i18n="mock.p1">Cà phê sữa đá</span><span class="tag-sm" data-i18n="mock.drinks">Đồ uống</span></div><div class="sku">SKU: CF001</div><div class="br"><span class="pr">25.000 đ</span><span class="stk ok" data-i18n="mock.stock85">Tồn kho: 85</span></div></div><div class="acts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4h-5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div></div>
-            <div class="prow"><div class="th" style="background:linear-gradient(135deg,#D97706,#f59e0b)">🍑</div><div class="info"><div class="nr"><span class="nm" data-i18n="mock.p2">Trà đào cam sả</span><span class="tag-sm" data-i18n="mock.drinks">Đồ uống</span></div><div class="sku">SKU: TR002</div><div class="br"><span class="pr">30.000 đ</span><span class="stk low" data-i18n="mock.stockLow">⚠️ Sắp hết: 4</span></div></div><div class="acts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4h-5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div></div>
-            <div class="prow"><div class="th" style="background:linear-gradient(135deg,#059669,#0369A1)">🥖</div><div class="info"><div class="nr"><span class="nm" data-i18n="mock.p5">Bánh mì thịt nướng</span><span class="tag-sm" data-i18n="mock.foodShort">Đồ ăn</span></div><div class="sku">SKU: BM010</div><div class="br"><span class="pr">20.000 đ</span><span class="stk ok" data-i18n="mock.stock42">Tồn kho: 42</span></div></div><div class="acts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4h-5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div></div>
-            <div class="prow"><div class="th" style="background:linear-gradient(135deg,#0ea5e9,#0369A1)">💧</div><div class="info"><div class="nr"><span class="nm" data-i18n="mock.p6">Nước suối Lavie</span><span class="tag-sm" data-i18n="mock.general">Chung</span></div><div class="sku">SKU: NS500</div><div class="br"><span class="pr">10.000 đ</span><span class="stk inf" data-i18n="mock.stockInf">♾️ Không quản lý</span></div></div><div class="acts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4h-5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 2l4 4-11 11H7v-4z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div></div>
-            <div class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="mock.addProduct">Thêm Sản Phẩm</span></div>
-          </div>
+          <img src="assets/product_screen.PNG" alt="Màn hình quản lý sản phẩm và kho hàng NanoPOS" loading="lazy" class="shot">
         </div></div>
         <div class="gcap"><b data-i18n="gallery.cap3t">Kho hàng &amp; Sản phẩm</b><span data-i18n="gallery.cap3d">SKU, tồn kho, cảnh báo sắp hết</span></div>
       </div>
@@ -603,14 +530,8 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
     </div>
     <div class="split-visual reveal" data-delay="1" style="display:flex;justify-content:center">
       <div class="phone" style="width:270px">
-        <div class="screen" style="height:560px">
-          <div class="sbar"><span>9:41</span><div class="dots"><i></i><i></i><i></i><span style="margin-left:4px">5G</span></div></div>
-          <div class="appbar"><div class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.6A5 5 0 0 0 18 8h-1.3A8 8 0 1 0 4 15.9"/></svg> <span data-i18n="mock.sync">Đồng bộ</span></div><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div></div>
-          <div class="sbody">
-            <div class="scard" style="margin-bottom:12px"><div class="h"><span data-i18n="mock.syncStatus">TRẠNG THÁI ĐỒNG BỘ</span><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div style="font-weight:800;color:#15803D;font-size:.86rem" data-i18n="mock.synced">Đã đồng bộ · 42/42 đơn</div><div style="font-size:.66rem;color:#94A3B8;margin-top:4px">Google Sheets · ai-cpos@gmail.com</div></div>
-            <div class="scard" style="margin-bottom:12px"><div style="font-size:.62rem;font-weight:800;color:#64748B;letter-spacing:.03em;margin-bottom:8px" data-i18n="mock.currencyPreview">TIỀN TỆ · XEM TRƯỚC</div><div style="font-family:var(--mono);font-weight:800;color:#0F766E;font-size:1.3rem">4.850.000 đ</div><div style="display:flex;gap:6px;margin-top:8px"><span class="chip on" style="font-size:.6rem" data-i18n="mock.cSuffix">đ (sau)</span><span class="chip" style="font-size:.6rem" data-i18n="mock.cDot">Dấu chấm</span><span class="chip" style="font-size:.6rem" data-i18n="mock.cDecimals">0 lẻ</span></div></div>
-            <div class="bubble ai" style="max-width:100%" data-i18n="mock.comboTip" data-i18n-html>💡 Gợi ý combo <b>"Đôi bạn thân"</b>: Trà sữa trân châu + Cà phê sữa đá = 55.000 đ, tăng giá trị trung bình mỗi đơn.</div>
-          </div>
+        <div class="screen" style="height:585px">
+          <img src="assets/sync_screen.PNG" alt="Màn hình cấu hình đồng bộ Google Sheets NanoPOS" loading="lazy" class="shot">
         </div>
       </div>
     </div>
@@ -667,7 +588,7 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
 <footer>
   <div class="wrap foot">
     <div style="max-width:320px">
-      <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span>NanoPOS</div>
+      <div class="brand"><span class="logo"><img src="assets/icon/app_icon_ios.png" alt="NanoPOS" width="36" height="36"></span>NanoPOS</div>
       <p class="fd" data-i18n="foot.desc">Hệ thống quản lý bán hàng &amp; thanh toán VietQR tối ưu cho cửa hàng bán lẻ, quán cà phê và hộ kinh doanh Việt Nam.</p>
       <div class="tech">
         <span>Flutter</span><span>Dart</span><span>Material 3</span><span>SQLite</span><span>Google Sheets API</span><span>Gemini AI</span>
@@ -793,7 +714,7 @@ footer{padding:64px 0 40px;border-top:1px solid var(--border)}
     "foot.resources":{vi:"Tài nguyên",en:"Resources"},
     "foot.setupGuide":{vi:"Hướng dẫn cấu hình",en:"Setup guide"},
     "foot.forWho":{vi:"Đối tượng sử dụng",en:"Who it's for"},
-    "foot.copyright":{vi:"© 2026 NanoPOS. Xây dựng bằng Flutter & Dart. · Offline-First POS cho Việt Nam.",en:"© 2026 NanoPOS. Built with Flutter & Dart. · Offline-First POS for Vietnam."},
+    "foot.copyright":{vi:"© 2026 NanoPOS · Offline-First POS cho Việt Nam.",en:"© 2026 NanoPOS · Offline-First POS for Vietnam."},
     /* ---- phone mockups ---- */
     "mock.sale":{vi:"Bán Hàng",en:"Sell"},
     "mock.searchProd":{vi:"Tìm sản phẩm hoặc SKU...",en:"Search products or SKU..."},
