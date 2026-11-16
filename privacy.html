@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chính sách dữ liệu · NanoPOS</title>
+<meta name="description" content="NanoPOS thu thập dữ liệu gì, lưu ở đâu, ai xem được, gửi cho dịch vụ nào và bạn có những quyền gì với dữ liệu của mình.">
+<meta name="theme-color" content="#0F766E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF; --bg-soft: #F5F8FA; --surface: #FFFFFF; --text: #0F172A; --muted: #475569;
+  --line: #E2E8F0; --accent: #0F766E; --accent-soft: #E6F6F4; --warn-bg: #FEF3C7; --warn-text: #78350F;
+  --night: #0B1120; --gutter: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0B1120; --bg-soft: #0E1628; --surface: #131E33; --text: #E2E8F0; --muted: #A5B4C8;
+    --line: #22304A; --accent: #2DD4BF; --accent-soft: rgba(45,212,191,.12); --warn-bg: #3A2A0B; --warn-text: #FDE68A;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.7 'Be Vietnam Pro', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid #2DD4BF; outline-offset: 3px; border-radius: 6px; }
+.wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 var(--gutter); }
+.site-header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; text-decoration: none; color: var(--text); }
+.brand img { width: 34px; height: 34px; }
+.back { font-weight: 600; text-decoration: none; font-size: .95rem; }
+.hero { background: var(--night); color: #E2E8F0; padding: 56px 0 48px; background-image: radial-gradient(600px 300px at 85% 0%, rgba(45,212,191,.25), transparent 70%); }
+.hero h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; color: #F8FAFC; }
+.hero p { margin: 0; color: #A5B4C8; max-width: 680px; }
+.hero .meta { margin-top: 16px; font-size: .92rem; }
+.draft { margin: 24px 0 0; padding: 14px 18px; border-radius: 12px; background: var(--warn-bg); color: var(--warn-text); font-size: .93rem; }
+.layout { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 48px 0 80px; align-items: start; }
+.toc { position: sticky; top: 88px; font-size: .9rem; }
+.toc b { display: block; margin-bottom: 8px; color: var(--muted); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+.toc ol { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--muted); }
+.toc a { color: var(--muted); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+main { min-width: 0; }
+main h2 { font-size: 1.35rem; letter-spacing: -.01em; margin: 40px 0 12px; scroll-margin-top: 80px; }
+main h2:first-child { margin-top: 0; }
+main p, main li { color: var(--muted); }
+main strong { color: var(--text); }
+main ul { padding-left: 20px; }
+main li { margin: 4px 0; }
+.box { padding: 18px 20px; border-radius: 14px; background: var(--accent-soft); margin: 16px 0; }
+.box p { margin: 0; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--bg-soft); color: var(--text); font-weight: 700; }
+td { color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+.todo { color: var(--warn-text); background: var(--warn-bg); padding: 0 6px; border-radius: 6px; font-style: italic; }
+.site-footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: .9rem; }
+[hidden] { display: none !important; }
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; gap: 28px; } .toc { position: static; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/brand/pos.svg" alt="" width="34" height="34">NanoPOS</a>
+    <a class="back" href="index.html">← Về trang chủ</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Chính sách dữ liệu</h1>
+    <p>NanoPOS thu thập dữ liệu gì, lưu ở đâu, ai xem được, gửi cho dịch vụ nào và bạn có những quyền gì với dữ liệu của mình.</p>
+    <p class="meta">Có hiệu lực từ: <span data-policy="policyEffectiveDate"></span></p>
+    <p class="draft" id="draft-banner" hidden>Bản nháp: trang này còn thiếu thông tin về bên chịu trách nhiệm, email liên hệ, nơi đặt máy chủ hoặc ngày hiệu lực, và cần được rà soát pháp lý trước khi công bố chính thức.</p>
+  </div>
+</section>
+
+<div class="wrap layout">
+  <nav class="toc" aria-label="Mục lục">
+    <b>Mục lục</b>
+    <ol>
+      <li><a href="#pham-vi">Phạm vi</a></li>
+      <li><a href="#chiu-trach-nhiem">Ai chịu trách nhiệm</a></li>
+      <li><a href="#thu-thap">Dữ liệu thu thập</a></li>
+      <li><a href="#khach-hang">Dữ liệu khách hàng của bạn</a></li>
+      <li><a href="#muc-dich">Dùng để làm gì</a></li>
+      <li><a href="#luu-tru">Lưu ở đâu</a></li>
+      <li><a href="#ben-ngoai">Dịch vụ bên ngoài</a></li>
+      <li><a href="#ai-xem">Ai xem được</a></li>
+      <li><a href="#bao-mat">Bảo mật</a></li>
+      <li><a href="#thoi-han">Lưu bao lâu</a></li>
+      <li><a href="#quyen">Quyền của bạn</a></li>
+      <li><a href="#thay-doi">Thay đổi chính sách</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <h2 id="pham-vi">1. Phạm vi</h2>
+    <p>Chính sách này áp dụng cho app quầy <strong>NanoPOS</strong>, web quản trị <strong>Nano Admin</strong>, app quản lý <strong>Nano Manager</strong> và trang giới thiệu này. Trong chính sách, "bạn" là chủ cửa hàng hoặc người dùng tài khoản; "chúng tôi" là bên vận hành NanoPOS nêu ở mục 2.</p>
+
+    <h2 id="chiu-trach-nhiem">2. Ai chịu trách nhiệm</h2>
+    <p>Bên chịu trách nhiệm về dữ liệu xử lý qua NanoPOS là <strong data-policy="controllerName"></strong>. Mọi câu hỏi và yêu cầu về dữ liệu, gửi tới <a data-policy="policyEmail"></a>.</p>
+
+    <h2 id="thu-thap">3. Dữ liệu chúng tôi thu thập</h2>
+    <ul>
+      <li><strong>Tài khoản:</strong> email, tên hiển thị, số điện thoại (nếu có), vai trò trong cửa hàng. Mật khẩu do hệ thống đăng nhập lưu ở dạng băm, không ai đọc được mật khẩu gốc.</li>
+      <li><strong>Thông tin cửa hàng:</strong> tên, địa chỉ, số điện thoại, logo, thông tin chủ thể kinh doanh và mã số thuế, tài khoản ngân hàng nhận tiền.</li>
+      <li><strong>Dữ liệu kinh doanh bạn nhập hoặc phát sinh khi bán:</strong> sản phẩm, giá bán, giá vốn, tồn kho, lô và hạn dùng; đơn hàng và thanh toán; phiếu nhập, nhà cung cấp và công nợ; sổ quỹ; ảnh và tệp chứng từ bạn đính kèm.</li>
+      <li><strong>Dữ liệu vận hành:</strong> nhật ký hoạt động (ai làm thao tác gì, lúc nào, từ ứng dụng nào), mã máy quầy, trạng thái đồng bộ. Nếu bạn bật thông báo đẩy trên Nano Manager, chúng tôi lưu mã thiết bị để gửi thông báo.</li>
+      <li><strong>Trang giới thiệu này:</strong> không dùng cookie theo dõi hay công cụ phân tích hành vi. Trình duyệt chỉ ghi nhớ ngôn ngữ bạn chọn, ngay trên máy bạn.</li>
+    </ul>
+
+    <h2 id="khach-hang">4. Dữ liệu khách hàng của bạn</h2>
+    <div class="box"><p>Thông tin về khách hàng của cửa hàng (tên, số điện thoại, địa chỉ, lịch sử mua và công nợ) do <strong>bạn</strong> nhập và quyết định thu thập. Chúng tôi lưu trữ và xử lý dữ liệu đó thay bạn, chỉ để cung cấp dịch vụ cho cửa hàng của bạn. Bạn có trách nhiệm thông báo và có sự đồng ý của khách hàng khi ghi lại thông tin của họ.</p></div>
+
+    <h2 id="muc-dich">5. Chúng tôi dùng dữ liệu để làm gì</h2>
+    <ul>
+      <li>Cung cấp các tính năng bạn dùng: bán hàng, đồng bộ giữa các máy, báo cáo, kho, sổ sách.</li>
+      <li>Giữ an toàn tài khoản: xác thực đăng nhập, phân quyền, ghi nhật ký thao tác.</li>
+      <li>Quản lý gói dịch vụ và thu phí thuê bao.</li>
+      <li>Hỗ trợ khi bạn yêu cầu và xử lý sự cố.</li>
+    </ul>
+    <p><strong>Chúng tôi không bán dữ liệu của bạn</strong> và không dùng dữ liệu kinh doanh của bạn để quảng cáo.</p>
+
+    <h2 id="luu-tru">6. Dữ liệu được lưu ở đâu</h2>
+    <p>Đơn bán được lưu ngay trên máy quầy để vẫn bán được khi mất mạng, rồi đồng bộ lên máy chủ khi có mạng. Máy chủ chạy nền tảng mã nguồn mở <strong>Supabase</strong> (cơ sở dữ liệu, đăng nhập, lưu tệp), đặt tại <span data-policy="hostingRegion"></span>.</p>
+
+    <h2 id="ben-ngoai">7. Dịch vụ bên ngoài nhận dữ liệu</h2>
+    <p>Một số tính năng cần gửi một phần dữ liệu cho dịch vụ khác. Đây là toàn bộ danh sách:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dịch vụ</th><th>Khi nào</th><th>Dữ liệu được gửi</th></tr></thead>
+        <tbody>
+          <tr><td>VietQR (api.vietqr.io)</td><td>Khi hiện mã QR chuyển khoản cho một đơn</td><td>Mã ngân hàng, số tài khoản và tên chủ tài khoản nhận tiền, số tiền, nội dung chuyển khoản</td></tr>
+          <tr><td>Firebase Cloud Messaging (Google)</td><td>Chỉ khi thông báo đẩy trên Nano Manager được bật</td><td>Mã thiết bị và nội dung thông báo (ví dụ tổng kết cuối ngày)</td></tr>
+          <tr><td>Google Gemini</td><td>Chỉ khi bạn tự bật trợ lý AI trong app quầy bằng khoá API của chính bạn</td><td>Câu hỏi của bạn, danh sách sản phẩm, các đơn gần đây, tên khách đang nợ và số nợ. Dữ liệu đi thẳng từ máy bạn tới Google theo điều khoản tài khoản Google của bạn</td></tr>
+          <tr><td>SePay</td><td>Chỉ khi bạn kết nối tài khoản SePay của chính bạn</td><td>SePay gửi về NanoPOS thông tin giao dịch ngân hàng (số tiền, nội dung, thời gian) để tự xác nhận đơn chuyển khoản</td></tr>
+          <tr><td>Google Fonts</td><td>Khi bạn mở trang giới thiệu này</td><td>Trình duyệt tải phông chữ từ Google, nên Google nhận địa chỉ IP và thông tin trình duyệt của bạn</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Ngoài các dịch vụ trên, chúng tôi chỉ cung cấp dữ liệu cho cơ quan nhà nước có thẩm quyền khi pháp luật yêu cầu.</p>
+
+    <h2 id="ai-xem">8. Ai xem được dữ liệu</h2>
+    <ul>
+      <li><strong>Trong cửa hàng của bạn:</strong> theo vai trò bạn cấp. Chủ cửa hàng xem toàn bộ; quản lý xem phần được giao; thu ngân chỉ thấy những gì cần để bán và không xem được giá vốn hay lãi.</li>
+      <li><strong>Giữa các cửa hàng:</strong> dữ liệu được tách theo từng cửa hàng ngay ở tầng cơ sở dữ liệu; tài khoản của cửa hàng này không đọc được dữ liệu của cửa hàng khác.</li>
+      <li><strong>Đội ngũ NanoPOS:</strong> xem thông tin tài khoản và gói dịch vụ để hỗ trợ và thu phí; chỉ truy cập dữ liệu kinh doanh khi cần để hỗ trợ bạn, xử lý sự cố hoặc khi pháp luật yêu cầu.</li>
+    </ul>
+
+    <h2 id="bao-mat">9. Bảo mật</h2>
+    <ul>
+      <li>Mọi kết nối giữa ứng dụng và máy chủ đều được mã hoá (HTTPS).</li>
+      <li>Phân quyền được kiểm ở máy chủ, không chỉ ở giao diện.</li>
+      <li>Thao tác nhạy cảm (đổi giá vốn, huỷ đơn, hoàn tiền, xoá dữ liệu) yêu cầu xác thực lại; app quản lý có khoá bằng vân tay hoặc mã PIN.</li>
+      <li>Nhật ký hoạt động ghi lại ai đã làm gì để bạn kiểm tra khi cần.</li>
+    </ul>
+
+    <h2 id="thoi-han">10. Lưu dữ liệu bao lâu</h2>
+    <p>Dữ liệu được lưu trong suốt thời gian bạn dùng NanoPOS. Hết hạn gói trả phí <strong>không</strong> làm mất dữ liệu: cửa hàng lùi về gói Miễn phí và dữ liệu giữ nguyên. Khi bạn yêu cầu xoá tài khoản, chúng tôi xoá hoặc ẩn danh dữ liệu cá nhân của tài khoản đó, trừ những gì pháp luật buộc phải giữ (ví dụ chứng từ kế toán, thuế).</p>
+
+    <h2 id="quyen">11. Quyền của bạn</h2>
+    <ul>
+      <li><strong>Xem và sửa:</strong> trực tiếp trong các ứng dụng.</li>
+      <li><strong>Xuất dữ liệu:</strong> các báo cáo trên Nano Admin xuất được ra Excel.</li>
+      <li><strong>Xoá tài khoản:</strong> gửi yêu cầu trong Nano Manager (Cài đặt → Xoá tài khoản) hoặc qua email ở mục 2. Chúng tôi xác nhận lại với bạn trước khi xoá.</li>
+      <li><strong>Rút lại đồng ý</strong> cho các tính năng tuỳ chọn: tắt thông báo đẩy, tắt trợ lý AI, ngắt kết nối SePay bất cứ lúc nào.</li>
+      <li><strong>Khiếu nại:</strong> gửi email ở mục 2; bạn cũng có quyền khiếu nại tới cơ quan có thẩm quyền về bảo vệ dữ liệu cá nhân.</li>
+    </ul>
+
+    <h2 id="thay-doi">12. Thay đổi chính sách</h2>
+    <p>Khi chính sách thay đổi, chúng tôi cập nhật trang này và ngày hiệu lực ở đầu trang. Thay đổi quan trọng sẽ được thông báo trong ứng dụng trước khi có hiệu lực.</p>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">© <span id="year">2026</span> NanoPOS · <a href="index.html">Trang chủ</a></div>
+</footer>
+
+<script src="site-config.js"></script>
+<script>
+(function () {
+  var S = window.SITE, missing = false;
+  ['controllerName', 'policyEmail', 'hostingRegion', 'policyEffectiveDate'].forEach(function (key) {
+    var value = (S[key] || '').trim();
+    if (!value) missing = true;
+    document.querySelectorAll('[data-policy="' + key + '"]').forEach(function (el) {
+      if (!value) {
+        el.textContent = '(chưa điền)';
+        el.classList.add('todo');
+        el.removeAttribute('href');
+        return;
+      }
+      el.textContent = value;
+      el.classList.remove('todo');
+      if (el.tagName === 'A' && key === 'policyEmail') el.setAttribute('href', 'mailto:' + value);
+    });
+  });
+  document.getElementById('draft-banner').hidden = !missing;
+  document.getElementById('year').textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>

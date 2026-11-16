@@ -667,19 +667,8 @@ section.soft .tabs { background: var(--surface); }
   </div>
 </footer>
 
+<script src="site-config.js"></script>
 <script>
-// ---- Site config: the only place contact and store links live. Empty = hidden / "coming soon".
-window.SITE = Object.assign({
-  zaloUrl: '',     // e.g. https://zalo.me/09xxxxxxxx
-  phone: '',       // e.g. 09xxxxxxxx
-  email: '',       // e.g. hello@nanopos.vn
-  androidUrl: '',  // Google Play listing of the counter app
-  iosUrl: '',      // App Store listing of the counter app
-  termsUrl: '',
-  privacyUrl: '',
-  webAppUrl: ''    // Nano Admin sign-in page
-}, window.SITE_OVERRIDE || {});
-
 // Vietnamese copy lives in the HTML; I18N.vi is harvested from the DOM at load time
 // (plus the keys below that never appear as element text). English is written out here.
 window.I18N = {

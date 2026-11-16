@@ -12,7 +12,7 @@ const collectErrors = (page: Page) => {
 test('empty config hides contact', async ({ page }) => {
   await page.goto('/index.html')
   await expect(page.locator('a[href=""], a[href="tel:"], a[href="mailto:"]')).toHaveCount(0)
-  for (const key of ['zalo', 'phone', 'email', 'terms', 'privacy']) {
+  for (const key of ['zalo', 'phone', 'email', 'terms']) {
     for (const el of await page.locator(`[data-site="${key}"]`).all()) await expect(el).toBeHidden()
   }
   const android = page.locator('[data-store="android"]').first()
@@ -199,6 +199,7 @@ test('tabs follow the aria tab pattern', async ({ page }) => {
 })
 
 test('empty legal nav is hidden', async ({ page }) => {
+  await page.addInitScript(() => { (window as any).SITE_OVERRIDE = { privacyUrl: '' } })
   await page.goto('/index.html')
   await expect(page.locator('.site-footer nav')).toHaveAttribute('hidden', '')
 })
@@ -242,4 +243,43 @@ test('hero reuses section shots', async ({ page }) => {
   await page.goto('/index.html')
   await expect(page.locator('.hero img[src$="admin-dashboard.webp"]')).toHaveCount(1)
   await expect(page.locator('.hero img[src$="pos-sale.webp"]')).toHaveCount(1)
+})
+
+test('footer links to the privacy page by default', async ({ page }) => {
+  await page.goto('/index.html')
+  const link = page.locator('[data-site="privacy"]')
+  await expect(link).toBeVisible()
+  await expect(link).toHaveAttribute('href', 'privacy.html')
+})
+
+test('privacy page names every outside service', async ({ page }) => {
+  await page.goto('/privacy.html')
+  await expect(page.locator('h1')).toBeVisible()
+  const body = page.locator('main')
+  for (const name of ['Supabase', 'VietQR', 'Firebase', 'Gemini', 'SePay', 'Google Fonts']) await expect(body).toContainText(name)
+  await expect(page.locator('a[href="index.html"]').first()).toBeVisible()
+})
+
+test('privacy page shows a draft banner until the owner fills it in', async ({ page }) => {
+  await page.goto('/privacy.html')
+  await expect(page.locator('#draft-banner')).toBeVisible()
+  await expect(page.locator('[data-policy="controllerName"]').first()).toContainText('chưa điền')
+
+  await page.addInitScript(() => {
+    ;(window as any).SITE_OVERRIDE = {
+      controllerName: 'Hộ kinh doanh A', policyEmail: 'privacy@example.vn',
+      hostingRegion: 'Việt Nam', policyEffectiveDate: '01/12/2026'
+    }
+  })
+  await page.reload()
+  await expect(page.locator('#draft-banner')).toBeHidden()
+  await expect(page.locator('[data-policy="controllerName"]').first()).toHaveText('Hộ kinh doanh A')
+  await expect(page.locator('a[data-policy="policyEmail"]').first()).toHaveAttribute('href', 'mailto:privacy@example.vn')
+})
+
+test('privacy page fits 360px', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 })
+  await page.goto('/privacy.html')
+  const { sw, cw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }))
+  expect(sw).toBeLessThanOrEqual(cw)
 })

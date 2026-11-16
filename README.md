@@ -11,10 +11,12 @@ Trang giới thiệu NanoPOS: một file `index.html` tĩnh (CSS/JS nằm trong 
 bash tests/serve.sh          # http://127.0.0.1:4173
 ```
 
-## Điền liên hệ và link store
+## Điền liên hệ, link store và thông tin chính sách
 
-Mọi số điện thoại, Zalo, email, link store, link điều khoản nằm trong khối `window.SITE` ở đầu thẻ `<script>` trong `index.html`.
+Mọi số điện thoại, Zalo, email, link store, link điều khoản nằm trong `site-config.js` (dùng chung cho `index.html` và `privacy.html`).
 Ô nào để trống thì nút tương ứng tự ẩn; nút store hiện "Sắp có trên …" và không bấm được.
+
+`privacy.html` là trang chính sách dữ liệu. Bốn ô `controllerName`, `policyEmail`, `hostingRegion`, `policyEffectiveDate` trong `site-config.js` còn trống thì trang hiện băng "Bản nháp". Điền đủ **và nhờ người có chuyên môn pháp lý rà soát** trước khi công bố. Danh sách dịch vụ bên ngoài ở mục 7 phải sửa cùng lúc khi ứng dụng thêm hoặc bỏ một dịch vụ. Khi trang lên sóng, dùng URL của nó cho dart-define `PRIVACY_URL` của Nano Manager.
 
 ## Chữ hai ngôn ngữ
 
