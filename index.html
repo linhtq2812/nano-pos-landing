@@ -226,7 +226,7 @@ img.shot:not([src]) { visibility: visible; }
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="#top"><img src="assets/brand/pos.svg" alt="" width="34" height="34">NanoPOS</a>
-    <nav class="nav" aria-label="Chính">
+    <nav class="nav" aria-label="Chính" data-i18n-attr="aria-label:aria.nav">
       <a href="#apps" data-i18n="nav.apps">Ứng dụng</a>
       <a href="#pos" data-i18n="nav.features">Tính năng</a>
       <a href="#pricing" data-i18n="nav.pricing">Bảng giá</a>
@@ -315,7 +315,7 @@ img.shot:not([src]) { visibility: visible; }
       <div>
         <span class="eyebrow"><img src="assets/brand/pos.svg" alt="" width="22" height="22"><span data-i18n="pos.eyebrow">App quầy NanoPOS · Miễn phí</span></span>
         <h2 data-i18n="pos.title">Bán nhanh ở quầy, kể cả khi rớt mạng</h2>
-        <p class="lead" data-i18n="pos.lead">Đủ mọi thứ một quầy thu ngân cần, không trả đồng nào và không cần web.</p>
+        <p class="lead" data-i18n="pos.lead">Đủ mọi thứ một quầy thu ngân cần, không trả đồng nào.</p>
         <div class="features">
           <div class="feature"><span class="badge"><svg class="icon"><use href="#i-tabs"/></svg></span><div><h3 data-i18n="pos.f1t">Nhiều đơn cùng lúc</h3><p data-i18n="pos.f1d">Mở nhiều tab đơn để phục vụ nhiều khách một lúc.</p></div></div>
           <div class="feature"><span class="badge"><svg class="icon"><use href="#i-scan"/></svg></span><div><h3 data-i18n="pos.f2t">Quét mã vạch</h3><p data-i18n="pos.f2d">Quét bằng camera hoặc súng quét, nhận cả mã thùng theo đơn vị tính.</p></div></div>
@@ -328,7 +328,7 @@ img.shot:not([src]) { visibility: visible; }
         </div>
       </div>
       <div>
-        <div class="tabs" role="tablist" aria-label="App quầy">
+        <div class="tabs" role="tablist" aria-label="App quầy" data-i18n-attr="aria-label:aria.posTabs">
           <button type="button" role="tab" aria-selected="true" aria-controls="pos-p1" data-i18n="pos.t1">Bán hàng</button>
           <button type="button" role="tab" aria-selected="false" aria-controls="pos-p2" data-i18n="pos.t2">Giỏ hàng & VietQR</button>
           <button type="button" role="tab" aria-selected="false" aria-controls="pos-p4" data-i18n="pos.t4">Báo cáo</button>
@@ -474,6 +474,7 @@ img.shot:not([src]) { visibility: visible; }
         <details><summary data-i18n="faq.q3">Khách chuyển khoản thì làm sao?</summary><p data-i18n="faq.a3">App quầy hiện mã VietQR có sẵn số tiền và nội dung đơn. Khách quét bằng app ngân hàng bất kỳ, tiền vào thẳng tài khoản của bạn, NanoPOS không giữ tiền.</p></details>
         <details><summary data-i18n="faq.q4">Có nhiều cửa hàng thì tính tiền thế nào?</summary><p data-i18n="faq.a4">Giá gói nhân với số cửa hàng bạn chọn trả phí. Ví dụ 3 cửa hàng gói Chuyên nghiệp là 3 × 249.000đ = 747.000đ mỗi tháng. Cửa hàng không trả phí vẫn bán bình thường bằng app quầy.</p></details>
         <details><summary data-i18n="faq.q5">Hết hạn gói thì có mất dữ liệu không?</summary><p data-i18n="faq.a5">Không. Cửa hàng lùi về gói Miễn phí: app quầy vẫn bán, dữ liệu giữ nguyên, gia hạn là dùng lại đầy đủ.</p></details>
+        <details><summary data-i18n="faq.q7">Dữ liệu của cửa hàng được giữ thế nào?</summary><p data-i18n="faq.a7">Đơn hàng lưu ngay trên máy quầy, rồi đồng bộ lên máy chủ NanoPOS khi có mạng. Chỉ những tài khoản bạn cấp quyền mới xem được dữ liệu của cửa hàng, và nhân viên thu ngân không xem được giá vốn hay lãi.</p></details>
         <details><summary data-i18n="faq.q6">Làm sao để dùng thử Nano Admin và Nano Manager?</summary><p data-i18n="faq.a6">Nhắn Zalo hoặc gọi cho chúng tôi. Chúng tôi tạo cửa hàng và kích hoạt 14 ngày gói Chuyên nghiệp cho bạn.</p></details>
       </div>
     </div>
@@ -513,7 +514,7 @@ img.shot:not([src]) { visibility: visible; }
 <footer class="site-footer">
   <div class="wrap">
     <span>© <span id="year">2026</span> NanoPOS</span>
-    <nav aria-label="Pháp lý">
+    <nav aria-label="Pháp lý" data-i18n-attr="aria-label:aria.legal">
       <a data-site="terms" data-i18n="footer.terms">Điều khoản sử dụng</a>
       <a data-site="privacy" data-i18n="footer.privacy">Chính sách bảo mật</a>
     </nav>
@@ -570,7 +571,7 @@ window.I18N = {
     'apps.admin.b3': 'Staff, roles, activity log',
     'pos.eyebrow': 'NanoPOS counter app · Free',
     'pos.title': 'Fast checkout, even when the internet drops',
-    'pos.lead': 'Everything a checkout counter needs, at no cost and without the web.',
+    'pos.lead': 'Everything a checkout counter needs, at no cost.',
     'pos.f1t': 'Several orders at once', 'pos.f1d': 'Open several order tabs to serve several customers.',
     'pos.f2t': 'Barcode scanning', 'pos.f2d': 'Scan with the camera or a scanner gun, including case barcodes per unit.',
     'pos.f3t': 'VietQR with the amount filled in', 'pos.f3d': 'Customers scan with their banking app; money goes straight to your account.',
@@ -649,6 +650,9 @@ window.I18N = {
     'faq.a4': 'Plan price times the number of shops you put on a paid plan. For example, 3 shops on Professional is 3 × 249,000đ = 747,000đ a month. Shops without a paid plan keep selling with the counter app.',
     'faq.q5': 'Do I lose data when my plan expires?',
     'faq.a5': 'No. The shop drops to the Free plan: the counter app keeps selling, your data stays, and renewing brings everything back.',
+    'faq.q7': 'How is my shop data kept?',
+    'faq.a7': 'Orders are saved on the counter device first, then synced to NanoPOS servers when online. Only accounts you grant access can see your shop data, and cashiers cannot see costs or profit.',
+    'aria.nav': 'Main', 'aria.posTabs': 'Counter app', 'aria.legal': 'Legal',
     'faq.q6': 'How do I try Nano Admin and Nano Manager?',
     'faq.a6': 'Message us on Zalo or call. We set up your shop and activate a 14-day Professional trial for you.',
     'contact.title': 'Start selling today',

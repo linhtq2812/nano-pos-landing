@@ -106,6 +106,8 @@ test('no forbidden claims', async ({ page }) => {
     return [document.body.innerText, JSON.stringify(d.vi), JSON.stringify(d.en)].join('\n')
   })
   expect(texts).not.toMatch(/hoá đơn điện tử|hóa đơn điện tử|e-invoice|google sheets|gemini|kiotviet|trợ lý ai|ai assistant/i)
+  // The counter app cannot add staff on its own (only web/Manager can), so never claim it needs no web.
+  expect(texts).not.toMatch(/không cần web|without the web/i)
 })
 
 test('three apps in order', async ({ page }) => {
@@ -144,4 +146,33 @@ test('og meta', async ({ page }) => {
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1)
   const res = await page.request.get('/assets/og.png')
   expect(res.ok()).toBe(true)
+})
+
+test('english page has no vietnamese left', async ({ page }) => {
+  await page.goto('/index.html')
+  await page.locator('[data-lang="en"]').first().click()
+  const leftovers = await page.evaluate(() => {
+    // Vietnamese-only letters; the currency sign "đ" alone is allowed.
+    const vi = /[ăâêôơưàáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệìíỉĩịòóỏõọồốổỗộờớởỡợùúủũụừứửữựỳýỷỹỵ]|đ(?=[a-z])/i
+    const out: string[] = []
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      const el = n.parentElement!
+      if (el.closest('[hidden], script, style, .lang')) continue
+      const t = n.textContent!.trim()
+      if (t && vi.test(t)) out.push(t)
+    }
+    document.querySelectorAll('[aria-label], img[alt]').forEach(el => {
+      const v = el.getAttribute('aria-label') ?? el.getAttribute('alt') ?? ''
+      if (vi.test(v)) out.push(v)
+    })
+    return out
+  })
+  expect(leftovers).toEqual([])
+})
+
+test('faq answers where data lives', async ({ page }) => {
+  await page.goto('/index.html')
+  await expect(page.locator('#faq')).toContainText('Dữ liệu')
+  await expect(page.locator('#faq details')).toHaveCount(7)
 })

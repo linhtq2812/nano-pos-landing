@@ -46,3 +46,5 @@ Chép nguyên thư mục (bỏ `tests/`, `tools/`) lên bất kỳ host tĩnh n�
 5. `node tools/shots/render.mjs tools/shots/og.html assets/og.png 1200 630`: ảnh chia sẻ.
 
 Mỗi lúc chạy một bước: các bước đều nặng (dev server, Flutter).
+
+**Trước khi lên sóng:** `og:image` đang là đường dẫn tương đối (`assets/og.png`). Khi có tên miền, đổi thành URL tuyệt đối và thêm `<meta property="og:url">`, nếu không Zalo/Facebook sẽ không hiện ảnh xem trước. Nếu publish thẳng cả repo (GitHub Pages), thư mục `tools/` cũng công khai; tài khoản demo trong đó chỉ dùng cho Supabase local.
