@@ -319,14 +319,12 @@ img.shot:not([src]) { visibility: visible; }
       <div>
         <div class="tabs" role="tablist" aria-label="App quầy">
           <button type="button" role="tab" aria-selected="true" aria-controls="pos-p1" data-i18n="pos.t1">Bán hàng</button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="pos-p2" data-i18n="pos.t2">Giỏ hàng</button>
-          <button type="button" role="tab" aria-selected="false" aria-controls="pos-p3" data-i18n="pos.t3">VietQR</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="pos-p2" data-i18n="pos.t2">Giỏ hàng & VietQR</button>
           <button type="button" role="tab" aria-selected="false" aria-controls="pos-p4" data-i18n="pos.t4">Báo cáo</button>
         </div>
         <div class="panes phone-stage">
           <div class="phone" role="tabpanel" id="pos-p1"><img class="shot" data-shot="pos-sale" data-i18n-attr="alt:alt.posSale" alt="Màn bán hàng nhiều đơn" width="720" height="1560" loading="lazy"></div>
-          <div class="phone" role="tabpanel" id="pos-p2" hidden><img class="shot" data-shot="pos-cart" data-i18n-attr="alt:alt.posCart" alt="Giỏ hàng và thanh toán" width="720" height="1560" loading="lazy"></div>
-          <div class="phone" role="tabpanel" id="pos-p3" hidden><img class="shot" data-shot="pos-qr" data-i18n-attr="alt:alt.posQr" alt="Mã VietQR có sẵn số tiền" width="720" height="1560" loading="lazy"></div>
+          <div class="phone" role="tabpanel" id="pos-p2" hidden><img class="shot" data-shot="pos-cart" data-i18n-attr="alt:alt.posCart" alt="Giỏ hàng, chọn thanh toán VietQR" width="720" height="1560" loading="lazy"></div>
           <div class="phone" role="tabpanel" id="pos-p4" hidden><img class="shot" data-shot="pos-report" data-i18n-attr="alt:alt.posReport" alt="Báo cáo doanh thu trên app quầy" width="720" height="1560" loading="lazy"></div>
         </div>
       </div>
@@ -377,8 +375,8 @@ img.shot:not([src]) { visibility: visible; }
       </div>
       <div class="phones">
         <figure><div class="phone"><img class="shot" data-shot="manager-home" data-i18n-attr="alt:alt.mgrHome" alt="Trang chủ Nano Manager" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s1">Số liệu hôm nay</figcaption></figure>
-        <figure><div class="phone"><img class="shot" data-shot="manager-pnl" data-i18n-attr="alt:alt.mgrPnl" alt="Báo cáo lãi lỗ trên điện thoại" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s2">Lãi lỗ</figcaption></figure>
-        <figure><div class="phone"><img class="shot" data-shot="manager-orders" data-i18n-attr="alt:alt.mgrOrders" alt="Danh sách đơn hàng" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s3">Đơn hàng</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-stocktake" data-i18n-attr="alt:alt.mgrStock" alt="Kiểm kho bằng camera" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s2">Kiểm kho</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-debt" data-i18n-attr="alt:alt.mgrDebt" alt="Công nợ của một khách" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s3">Công nợ</figcaption></figure>
         <figure><div class="phone"><img class="shot" data-shot="manager-receipt" data-i18n-attr="alt:alt.mgrReceipt" alt="Lập phiếu nhập hàng" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s4">Nhập hàng</figcaption></figure>
       </div>
       <div class="features three">
@@ -570,9 +568,9 @@ window.I18N = {
     'pos.f6t': 'Receipt printing', 'pos.f6d': 'Print receipts on a thermal printer connected to the counter.',
     'pos.f7t': 'Products and stock', 'pos.f7d': 'Variants, units, photos and stock right on the device.',
     'pos.f8t': 'Sales reports', 'pos.f8d': 'Revenue, order history and products often bought together.',
-    'pos.t1': 'Sell', 'pos.t2': 'Cart', 'pos.t3': 'VietQR', 'pos.t4': 'Reports',
+    'pos.t1': 'Sell', 'pos.t2': 'Cart & VietQR', 'pos.t4': 'Reports',
     'alt.posSale': 'Sale screen with several orders', 'alt.posCart': 'Cart and checkout',
-    'alt.posQr': 'VietQR code with the amount', 'alt.posReport': 'Revenue report in the counter app',
+    'alt.posReport': 'Revenue report in the counter app',
     'admin.eyebrow': 'Nano Admin · Admin web',
     'admin.title': 'Books, stock and finance on a big screen',
     'admin.lead': 'Everything the counter records lands here. See real profit after cost, reconcile bank transfers, manage stock by batch and expiry, keep the tax book for a household business.',
@@ -590,8 +588,8 @@ window.I18N = {
     'manager.eyebrow': 'Nano Manager · Manager app',
     'manager.title': 'Your shop in your pocket',
     'manager.lead': "Know today's sales, what is running low and who owes you without standing at the counter. Then act on it from your phone.",
-    'manager.s1': "Today's numbers", 'manager.s2': 'Profit & loss', 'manager.s3': 'Orders', 'manager.s4': 'Receiving',
-    'alt.mgrHome': 'Nano Manager home', 'alt.mgrPnl': 'Profit and loss on the phone', 'alt.mgrOrders': 'Order list', 'alt.mgrReceipt': 'Creating a goods receipt',
+    'manager.s1': "Today's numbers", 'manager.s2': 'Stocktake', 'manager.s3': 'Debts', 'manager.s4': 'Receiving',
+    'alt.mgrHome': 'Nano Manager home', 'alt.mgrStock': 'Counting stock with the camera', 'alt.mgrDebt': "A customer's debts", 'alt.mgrReceipt': 'Creating a goods receipt',
     'manager.f1t': 'Numbers at a glance', 'manager.f1d': 'Revenue, gross profit and orders vs yesterday; P&L, cash book and debts.',
     'manager.f2t': 'Things to look at', 'manager.f2d': 'Low stock, cancelled orders, cash-close gaps, counters out of sync, overdue debts.',
     'manager.f3t': 'Stock work with the camera', 'manager.f3d': 'Receive goods, count stock and return to suppliers in the storeroom, even on a patchy connection.',
