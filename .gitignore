@@ -4,3 +4,4 @@ playwright-report/
 node_modules
 .superpowers/
 tools/shots/test-results/
+__pycache__/
