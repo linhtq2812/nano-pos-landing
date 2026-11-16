@@ -22,66 +22,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal: #0F766E; --teal-300: #2DD4BF; --slate: #0F172A;
-  --bg: #FFFFFF; --bg-soft: #F6F8FB; --surface: #FFFFFF; --text: #0F172A; --muted: #475569;
-  --line: #E2E8F0; --accent: #0F766E; --accent-soft: #E6F6F4; --on-accent: #FFFFFF;
-  --band: #0F172A; --band-text: #E2E8F0; --band-muted: #94A3B8;
-  --frame: #0F172A; --frame-bar: #E2E8F0; --placeholder: #E8EEF4;
-  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 12px 32px rgba(15,23,42,.10);
-  --radius: 18px; --gutter: 16px; --max: 1160px;
+  --teal: #0F766E; --teal-500: #14B8A6; --teal-300: #2DD4BF; --teal-200: #99F6E4; --slate: #0F172A;
+  --bg: #FFFFFF; --bg-soft: #F5F8FA; --surface: #FFFFFF; --text: #0F172A; --muted: #475569; --subtle: #64748B;
+  --line: #E2E8F0; --accent: #0F766E; --accent-strong: #115E59; --accent-soft: #E6F6F4; --on-accent: #FFFFFF;
+  --night: #0B1120; --night-2: #111B2E; --night-text: #E2E8F0; --night-muted: #A5B4C8; --night-line: rgba(148,163,184,.18);
+  --frame: #0F172A; --frame-bar: #E8EDF3; --placeholder: #E8EEF4;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.06), 0 2px 8px rgba(15,23,42,.05);
+  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 14px 36px -8px rgba(15,23,42,.14);
+  --shadow-lg: 0 30px 70px -20px rgba(2,6,23,.45);
+  --radius: 20px; --radius-sm: 12px; --gutter: 16px; --max: 1200px;
+  --ease: cubic-bezier(.2,.7,.2,1);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0B1120; --bg-soft: #0F172A; --surface: #131E33; --text: #E2E8F0; --muted: #94A3B8;
-    --line: #22304A; --accent: #2DD4BF; --accent-soft: rgba(45,212,191,.12); --on-accent: #042F2E;
-    --band: #020617; --frame: #020617; --frame-bar: #1E293B; --placeholder: #1A2740;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.45);
+    --bg: #0B1120; --bg-soft: #0E1628; --surface: #131E33; --text: #E2E8F0; --muted: #A5B4C8; --subtle: #94A3B8;
+    --line: #22304A; --accent: #2DD4BF; --accent-strong: #5EEAD4; --accent-soft: rgba(45,212,191,.12); --on-accent: #042F2E;
+    --night: #070C18; --night-2: #0E1628;
+    --frame: #020617; --frame-bar: #1E293B; --placeholder: #1A2740;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 36px -8px rgba(0,0,0,.5);
   }
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
-@media (max-width: 960px) { html { scroll-padding-top: 112px; } }
-body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 'Be Vietnam Pro', system-ui, sans-serif; overflow-x: hidden; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 76px; }
+@media (max-width: 960px) { html { scroll-padding-top: 116px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.65 'Be Vietnam Pro', system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
-h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; letter-spacing: -.015em; }
-h1 { font-size: clamp(2.1rem, 5.2vw, 3.6rem); font-weight: 800; }
-h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 800; }
-h3 { font-size: 1.12rem; font-weight: 700; }
+:focus-visible { outline: 3px solid var(--teal-300); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { line-height: 1.15; margin: 0 0 .5em; letter-spacing: -.02em; }
+h1 { font-size: clamp(2.3rem, 5.6vw, 4.2rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 3.8vw, 2.75rem); font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0 0 1em; }
 ul { margin: 0; padding: 0; list-style: none; }
 .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-section { padding: 88px 0; }
+section { padding: 104px 0; position: relative; }
 section.soft { background: var(--bg-soft); }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-.lead { font-size: 1.125rem; color: var(--muted); max-width: 660px; }
-.section-head { margin-bottom: 44px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 6px 12px 6px 10px; border-radius: 999px; margin-bottom: 18px; }
+.eyebrow img { width: 18px; height: 18px; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 640px; }
+.section-head { margin-bottom: 52px; }
 .section-head.center { text-align: center; }
 .section-head.center .lead { margin-left: auto; margin-right: auto; }
 .icon { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.grad { background: linear-gradient(100deg, var(--teal-300), #5EEAD4 45%, #A7F3D0); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 /* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 12px; font: inherit; font-weight: 700; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s; white-space: nowrap; }
-.btn:hover { transform: translateY(-1px); }
-.btn-primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 6px 18px rgba(15,118,110,.25); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 14px; font: inherit; font-weight: 700; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s; white-space: nowrap; }
+.btn:hover { transform: translateY(-2px); }
+.btn .icon { width: 20px; height: 20px; }
+.btn-primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 10px 24px -8px rgba(15,118,110,.55); }
+.btn-primary:hover { box-shadow: 0 16px 30px -10px rgba(15,118,110,.6); }
 .btn-ghost { border-color: var(--line); background: var(--surface); color: var(--text); }
+.btn-glow { background: linear-gradient(135deg, #2DD4BF, #14B8A6); color: #042F2E; box-shadow: 0 12px 34px -10px rgba(45,212,191,.7); }
+.btn-outline-light { border-color: rgba(226,232,240,.28); color: #F1F5F9; background: rgba(255,255,255,.04); }
+.btn-outline-light:hover { background: rgba(255,255,255,.08); }
 .btn[aria-disabled="true"] { opacity: .55; cursor: default; transform: none; box-shadow: none; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
-.link-arrow { color: var(--accent); font-weight: 700; text-decoration: none; }
+.link-arrow { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 700; text-decoration: none; }
 .link-arrow:hover { text-decoration: underline; }
 
 /* Header */
-.site-header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--line); }
-.site-header .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; text-decoration: none; }
-.brand img { width: 34px; height: 34px; }
-.nav { display: flex; gap: 24px; margin-left: auto; }
-.nav a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: .95rem; }
+.site-header { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: center; gap: 16px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; text-decoration: none; letter-spacing: -.02em; }
+.brand img { width: 36px; height: 36px; }
+.nav { display: flex; gap: 28px; margin-left: auto; }
+.nav a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: .95rem; transition: color .2s; }
 .nav a:hover { color: var(--text); }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; flex: none; }
 .lang button { font: inherit; font-size: .8rem; font-weight: 700; padding: 6px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
-.header-cta { min-height: 40px; padding: 0 16px; font-size: .9rem; box-shadow: none; }
+.header-cta { min-height: 42px; padding: 0 18px; font-size: .9rem; box-shadow: none; }
 .mobile-nav { display: none; }
 @media (max-width: 960px) {
   .nav { display: none; } .lang { margin-left: auto; }
@@ -91,123 +105,196 @@ section.soft { background: var(--bg-soft); }
 }
 @media (max-width: 480px) { .header-cta { display: none; } }
 
-/* Hero */
-.hero { padding: 64px 0 88px; background: radial-gradient(1200px 500px at 85% -10%, var(--accent-soft), transparent 70%); }
-.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
-.hero h1 .hl { color: var(--accent); }
-.hero .lead { margin-bottom: 28px; }
-.checks { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; color: var(--muted); font-weight: 600; font-size: .95rem; }
+/* Hero: always dark, the brand's night look */
+.hero { padding: 88px 0 0; color: var(--night-text); background: var(--night); overflow: hidden; isolation: isolate; }
+.hero::before { content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(700px 420px at 78% 18%, rgba(45,212,191,.28), transparent 70%),
+    radial-gradient(600px 400px at 8% 0%, rgba(20,184,166,.18), transparent 70%),
+    radial-gradient(900px 500px at 50% 110%, rgba(15,118,110,.35), transparent 70%); }
+.hero::after { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .35;
+  background-image: linear-gradient(rgba(148,163,184,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.09) 1px, transparent 1px);
+  background-size: 56px 56px; mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%); }
+.hero-inner { text-align: center; max-width: 900px; margin: 0 auto; }
+.hero .pill { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: rgba(45,212,191,.1); border: 1px solid rgba(45,212,191,.28); color: #CCFBF1; font-size: .88rem; font-weight: 600; margin-bottom: 26px; }
+.hero .pill b { background: #2DD4BF; color: #042F2E; padding: 2px 10px; border-radius: 999px; font-size: .78rem; }
+.hero h1 { color: #F8FAFC; margin-bottom: 22px; }
+.hero .lead { color: var(--night-muted); margin: 0 auto 34px; max-width: 700px; font-size: 1.2rem; }
+.hero .btn-row { justify-content: center; }
+.checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin-top: 28px; color: var(--night-muted); font-weight: 600; font-size: .95rem; }
 .checks li { display: flex; align-items: center; gap: 8px; }
-.checks .icon { color: var(--accent); width: 20px; height: 20px; }
-.hero-visual { position: relative; padding-bottom: 40px; }
-.hero-visual .browser { width: 100%; }
-.hero-visual .phone { position: absolute; right: -8px; bottom: 0; width: 34%; max-width: 210px; }
+.checks .icon { color: #2DD4BF; width: 20px; height: 20px; }
+.stage { position: relative; max-width: 1060px; margin: 64px auto 0; padding-bottom: 0; perspective: 1800px; }
+.stage .browser { transform: rotateX(8deg); transform-origin: 50% 100%; box-shadow: var(--shadow-lg), 0 0 0 1px rgba(148,163,184,.18); border: 0; border-radius: 16px 16px 0 0; }
+.stage .phone { position: absolute; right: -10px; bottom: -40px; width: 23%; max-width: 230px; box-shadow: var(--shadow-lg); }
+.chip { position: absolute; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: rgba(15,23,42,.82); border: 1px solid rgba(148,163,184,.22); color: #E2E8F0; font-size: .85rem; font-weight: 600; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 14px 30px -12px rgba(0,0,0,.6); white-space: nowrap; }
+.chip .dot { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: rgba(45,212,191,.16); color: #2DD4BF; }
+.chip .dot .icon { width: 18px; height: 18px; }
+.chip small { display: block; color: var(--night-muted); font-weight: 500; font-size: .75rem; }
+.chip.c1 { left: -28px; top: 34%; }
+.chip.c2 { left: 6%; bottom: 14%; }
+.hero-fade { height: 120px; margin-top: -80px; position: relative; background: linear-gradient(to bottom, transparent, var(--night)); }
 @media (max-width: 900px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 620px; margin: 0 auto; width: 100%; }
-  .hero-visual .phone { right: 0; }
+  .hero { padding-top: 56px; }
+  .stage .phone { right: 2px; bottom: -24px; width: 30%; }
+  .chip { display: none; }
+}
+
+/* Stats strip */
+.stats { background: var(--night); color: var(--night-text); padding: 8px 0 72px; }
+.stats ul { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--night-line); border-radius: var(--radius); background: rgba(255,255,255,.02); }
+.stats li { padding: 26px 24px; }
+.stats li + li { border-left: 1px solid var(--night-line); }
+.stats strong { display: block; font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 800; letter-spacing: -.03em; color: #F8FAFC; line-height: 1.1; margin-bottom: 6px; }
+.stats strong em { font-style: normal; color: #2DD4BF; }
+.stats span { color: var(--night-muted); font-size: .92rem; }
+@media (max-width: 760px) {
+  .stats ul { grid-template-columns: 1fr 1fr; }
+  .stats li:nth-child(3) { border-left: 0; }
+  .stats li:nth-child(n+3) { border-top: 1px solid var(--night-line); }
 }
 
 /* Device frames */
 .browser { border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); border: 1px solid var(--line); }
-.browser-bar { display: flex; gap: 6px; align-items: center; height: 30px; padding: 0 12px; background: var(--frame-bar); }
+.browser-bar { display: flex; gap: 7px; align-items: center; height: 32px; padding: 0 14px; background: var(--frame-bar); }
 .browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: #CBD5E1; }
 .browser-bar i:nth-child(1) { background: #F87171; } .browser-bar i:nth-child(2) { background: #FBBF24; } .browser-bar i:nth-child(3) { background: #34D399; }
-.phone { border-radius: 32px; padding: 8px; background: var(--frame); box-shadow: var(--shadow); }
-.phone img, .phone .shot { border-radius: 25px; }
+.phone { border-radius: 34px; padding: 8px; background: var(--frame); box-shadow: var(--shadow); }
+.phone img, .phone .shot { border-radius: 27px; }
 .shot { width: 100%; background: var(--placeholder); object-fit: cover; object-position: top; }
 .browser .shot { aspect-ratio: 16 / 10; }
 .phone .shot { aspect-ratio: 9 / 19.5; }
-img.shot:not([src]) { visibility: visible; }
 
 /* Apps */
-.apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.app-card { display: flex; flex-direction: column; gap: 14px; padding: 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.app-card { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 30px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); overflow: hidden; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.app-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, #0F766E, #2DD4BF); }
+.app-card[data-app="manager"]::before, .app-card[data-app="admin"]::before { background: linear-gradient(90deg, #0F172A, #2DD4BF); }
+.app-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .app-card header { display: flex; align-items: center; gap: 14px; }
-.app-card header img { width: 56px; height: 56px; }
-.app-card h3 { margin: 0; font-size: 1.25rem; }
-.tag { display: inline-block; font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.app-card header img { width: 58px; height: 58px; filter: drop-shadow(0 8px 16px rgba(15,23,42,.18)); }
+.app-card h3 { margin: 0 0 4px; font-size: 1.3rem; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); }
 .tag.paid { background: color-mix(in srgb, #F59E0B 16%, transparent); color: #92400E; }
 @media (prefers-color-scheme: dark) { .tag.paid { color: #FBBF24; } }
-.app-card .for { color: var(--muted); font-size: .95rem; margin: 0; }
-.app-card ul { display: grid; gap: 8px; font-size: .95rem; }
+.app-card .for { color: var(--muted); margin: 0; }
+.app-card ul { display: grid; gap: 10px; font-size: .95rem; }
 .app-card li { display: flex; gap: 10px; }
 .app-card li .icon { color: var(--accent); width: 18px; height: 18px; margin-top: 3px; }
-.app-card .link-arrow { margin-top: auto; }
+.app-card .link-arrow { margin-top: auto; padding-top: 6px; }
 @media (max-width: 900px) { .apps { grid-template-columns: 1fr; } }
 
-/* Feature showcase */
-.showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-.showcase.flip > :first-child { order: 2; }
-.features { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 26px; }
+/* Feature showcases */
+.showcase { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+.features { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 28px; margin-top: 8px; }
 .feature { display: flex; gap: 14px; }
-.feature .badge { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+.feature .badge { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: var(--accent-soft); color: var(--accent); }
 .feature h3 { font-size: 1rem; margin: 0 0 4px; }
 .feature p { margin: 0; color: var(--muted); font-size: .93rem; }
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.tabs button { font: inherit; font-size: .88rem; font-weight: 600; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
-.tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 14px; background: var(--bg-soft); border: 1px solid var(--line); margin-bottom: 22px; }
+section.soft .tabs { background: var(--surface); }
+.tabs button { font: inherit; font-size: .9rem; font-weight: 600; padding: 8px 16px; border-radius: 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; transition: background .2s, color .2s; }
+.tabs button:hover { color: var(--text); }
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--on-accent); box-shadow: 0 6px 16px -6px rgba(15,118,110,.6); }
 .panes > [role="tabpanel"][hidden] { display: none; }
-.phone-stage { display: flex; justify-content: center; }
-.phone-stage .phone { width: 100%; max-width: 300px; }
-.phones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 48px; }
+.phone-stage { position: relative; display: flex; justify-content: center; padding: 44px 24px; border-radius: 28px; background: radial-gradient(420px 320px at 50% 30%, rgba(45,212,191,.35), transparent 70%), linear-gradient(160deg, #0F766E, #0F172A); }
+.phone-stage .phone { width: 100%; max-width: 300px; box-shadow: var(--shadow-lg); }
+.center-col { text-align: center; }
+.frame-stage { padding: 14px; border-radius: 26px; background: linear-gradient(140deg, rgba(45,212,191,.55), rgba(15,23,42,.15) 45%, rgba(15,118,110,.45)); box-shadow: var(--shadow); }
+.frame-stage .browser { border: 0; box-shadow: none; }
+.phones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; align-items: start; }
 .phones figure { margin: 0; }
-.phones figcaption { text-align: center; color: var(--muted); font-size: .88rem; font-weight: 600; margin-top: 12px; }
+.phones figure:nth-child(2n) { margin-top: 48px; }
+.phones figcaption { text-align: center; color: var(--muted); font-size: .9rem; font-weight: 600; margin-top: 14px; }
 .features.three { grid-template-columns: repeat(3, 1fr); }
+.tier-note { display: flex; gap: 10px; align-items: flex-start; margin: 36px 0 0; padding: 14px 18px; border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--muted); font-size: .92rem; }
+.tier-note strong { color: var(--text); }
 @media (max-width: 900px) {
-  .showcase { grid-template-columns: 1fr; gap: 40px; }
-  .showcase.flip > :first-child { order: 0; }
+  .showcase { grid-template-columns: 1fr; gap: 44px; }
   .phones { grid-template-columns: repeat(2, 1fr); }
+  .phones figure:nth-child(2n) { margin-top: 32px; }
   .features.three { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) { .features, .features.three { grid-template-columns: 1fr; } }
 
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; counter-reset: step; }
+.step { position: relative; padding: 30px 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.step .num { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; background: linear-gradient(135deg, #0F766E, #2DD4BF); color: #fff; font-weight: 800; font-size: 1.15rem; margin-bottom: 18px; box-shadow: 0 10px 22px -10px rgba(15,118,110,.7); }
+.step p { color: var(--muted); margin: 0; font-size: .95rem; }
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr; } }
+
 /* Pricing */
-.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-.plan { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 30px 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
-.plan.featured { border: 2px solid var(--accent); box-shadow: var(--shadow); }
-.plan .ribbon { position: absolute; top: -13px; left: 28px; font-size: .75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--accent); color: var(--on-accent); }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.plan { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 32px 30px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
 .plan h3 { margin: 0; font-size: 1.2rem; }
 .plan .desc { color: var(--muted); font-size: .93rem; margin: 0; min-height: 3em; }
 .price { display: flex; flex-direction: column; gap: 0; }
-.price strong { font-size: 2.2rem; font-weight: 800; letter-spacing: -.02em; }
-.price span { color: var(--muted); font-size: .9rem; }
-.plan ul { display: grid; gap: 10px; font-size: .95rem; }
+.price strong { font-size: 2.4rem; font-weight: 800; letter-spacing: -.03em; }
+.price span { color: var(--subtle); font-size: .9rem; }
+.plan ul { display: grid; gap: 11px; font-size: .95rem; }
 .plan li { display: flex; gap: 10px; }
 .plan li .icon { color: var(--accent); width: 18px; height: 18px; margin-top: 3px; }
 .plan li.staff { font-weight: 700; }
 .plan .btn { margin-top: auto; }
-.tier-note { margin: 28px 0 0; color: var(--muted); font-size: .9rem; }
-.tier-note strong { color: var(--text); }
-.pricing-notes { margin-top: 28px; display: grid; gap: 6px; color: var(--muted); font-size: .93rem; text-align: center; }
-@media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+.plan.featured { background: linear-gradient(170deg, #0F172A, #0B2A2A); color: #E2E8F0; border: 1px solid rgba(45,212,191,.45); box-shadow: 0 30px 60px -24px rgba(15,118,110,.55); transform: translateY(-10px); }
+.plan.featured .desc, .plan.featured .price span { color: #A5B4C8; }
+.plan.featured li .icon { color: #2DD4BF; }
+.plan.featured h3, .plan.featured .price strong { color: #F8FAFC; }
+.plan .ribbon { position: absolute; top: -13px; left: 30px; font-size: .75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: linear-gradient(135deg, #2DD4BF, #14B8A6); color: #042F2E; }
+.pricing-notes { margin-top: 34px; display: grid; gap: 6px; color: var(--muted); font-size: .93rem; text-align: center; }
+@media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } .plan.featured { transform: none; } }
 
 /* FAQ */
-.faq { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
-.faq details { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 0 22px; }
-.faq summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; gap: 16px; }
+.faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
+.faq-grid .section-head { margin: 0; position: sticky; top: 100px; }
+.faq { display: grid; gap: 12px; }
+.faq details { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 0 22px; transition: box-shadow .2s; }
+.faq details[open] { box-shadow: var(--shadow-sm); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+.faq summary { cursor: pointer; list-style: none; padding: 19px 0; font-weight: 700; display: flex; justify-content: space-between; gap: 16px; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: '+'; color: var(--accent); font-size: 1.4rem; line-height: 1; }
+.faq summary::after { content: '+'; display: grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-size: 1.1rem; line-height: 1; }
 .faq details[open] summary::after { content: '−'; }
-.faq details p { color: var(--muted); padding-bottom: 18px; margin: 0; }
+.faq details p { color: var(--muted); padding-bottom: 19px; margin: 0; }
+@media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; gap: 28px; } .faq-grid .section-head { position: static; } }
 
 /* Contact band */
-.band { background: var(--band); color: var(--band-text); border: 1px solid var(--line); border-radius: 24px; padding: 56px 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
-.band h2 { color: #fff; }
-.band p { color: var(--band-muted); }
-.band .group + .group { margin-top: 22px; }
-.band .group-label { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-300); margin-bottom: 10px; }
-.band .btn-primary { background: #2DD4BF; color: #042F2E; }
-.band .btn-ghost { background: transparent; border-color: #334155; color: #E2E8F0; }
-.band .no-contact { color: var(--band-muted); font-size: .93rem; }
-@media (max-width: 900px) { .band { grid-template-columns: 1fr; padding: 40px 24px; } }
+.band { position: relative; overflow: hidden; isolation: isolate; color: var(--night-text); border-radius: 28px; padding: 64px 56px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 44px; align-items: center; background: linear-gradient(135deg, #0F172A 0%, #0F3B3A 55%, #0F766E 100%); border: 1px solid var(--line); box-shadow: 0 30px 70px -30px rgba(15,118,110,.6); }
+.band::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(500px 300px at 90% 10%, rgba(45,212,191,.35), transparent 70%); }
+.band h2 { color: #F8FAFC; }
+.band p { color: #C7D2DE; }
+.band .group + .group { margin-top: 24px; }
+.band .group-label { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #5EEAD4; margin-bottom: 10px; }
+.band .btn-primary { background: linear-gradient(135deg, #2DD4BF, #14B8A6); color: #042F2E; box-shadow: none; }
+.band .btn-ghost { background: rgba(255,255,255,.04); border-color: rgba(226,232,240,.28); color: #F1F5F9; }
+.band .no-contact { color: #C7D2DE; font-size: .93rem; }
+@media (max-width: 900px) { .band { grid-template-columns: 1fr; padding: 44px 24px; } }
 
 /* Footer */
-.site-footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: .9rem; }
-.site-footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
+.site-footer { border-top: 1px solid var(--line); padding: 44px 0; color: var(--muted); font-size: .92rem; }
+.site-footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
+.site-footer .foot-brand { display: flex; align-items: center; gap: 12px; }
+.site-footer .foot-brand img { width: 30px; height: 30px; }
+.site-footer .foot-brand b { color: var(--text); }
+.site-footer .foot-apps { display: flex; gap: 8px; }
+.site-footer .foot-apps img { width: 26px; height: 26px; }
 .site-footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.site-footer nav a { text-decoration: none; }
+.site-footer nav a:hover { color: var(--text); }
 [hidden] { display: none !important; }
-@media (max-width: 600px) { section { padding: 64px 0; } .btn-row .btn { flex: 1 1 auto; } }
+@media (max-width: 600px) { section { padding: 72px 0; } .btn-row .btn { flex: 1 1 auto; } }
+@media (max-width: 600px) {
+  .hero .pill { font-size: .8rem; text-align: left; }
+  .hero .pill b { white-space: nowrap; }
+  .stats li { padding: 20px 18px; }
+  .stats strong { font-size: 1.45rem; white-space: nowrap; }
+  .tabs button { padding: 7px 11px; font-size: .84rem; }
+}
+
+/* Scroll reveal: only when JS opts in and motion is allowed */
+.reveal-on [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal-on [data-reveal].in { opacity: 1; transform: none; }
+@media print { .reveal-on [data-reveal] { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
@@ -229,12 +316,14 @@ img.shot:not([src]) { visibility: visible; }
   <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9v11h18V9M3 9h18M9 20v-6h6v6"/></symbol>
   <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8"/><path d="M21 4v5h-5M3 20v-5h5"/></symbol>
   <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><path d="M7 7h.01"/></symbol>
 </svg>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="assets/brand/pos.svg" alt="" width="34" height="34">NanoPOS</a>
+    <a class="brand" href="#top"><img src="assets/brand/pos.svg" alt="" width="36" height="36">NanoPOS</a>
     <nav class="nav" aria-label="Chính" data-i18n-attr="aria-label:aria.nav">
       <a href="#apps" data-i18n="nav.apps">Ứng dụng</a>
       <a href="#pos" data-i18n="nav.features">Tính năng</a>
@@ -261,13 +350,13 @@ img.shot:not([src]) { visibility: visible; }
   <!-- Hero -->
   <section class="hero">
     <div class="wrap">
-      <div>
-        <span class="eyebrow" data-i18n="hero.eyebrow">Phần mềm bán hàng cho cửa hàng nhỏ</span>
-        <h1 data-i18n="hero.title" data-i18n-html>Bán hàng <span class="hl">miễn phí</span>.<br>Quản lý từ xa khi cửa hàng lớn lên.</h1>
+      <div class="hero-inner">
+        <span class="pill"><b data-i18n="hero.pillTag">Miễn phí</b><span data-i18n="hero.eyebrow">Phần mềm bán hàng cho cửa hàng nhỏ</span></span>
+        <h1 data-i18n="hero.title" data-i18n-html>Bán hàng <span class="grad">miễn phí</span>.<br>Quản lý từ xa khi cửa hàng lớn lên.</h1>
         <p class="lead" data-i18n="hero.lead">App quầy NanoPOS dùng miễn phí, không giới hạn máy, vẫn bán khi mất mạng và thu tiền bằng VietQR. Khi cần quản lý kho, sổ sách, nhiều cửa hàng, thêm Nano Admin trên máy tính và Nano Manager trên điện thoại.</p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="#contact" data-i18n="hero.cta">Tải app quầy miễn phí</a>
-          <a class="btn btn-ghost" href="#contact" data-i18n="hero.cta2">Liên hệ dùng thử</a>
+          <a class="btn btn-glow" href="#contact"><svg class="icon"><use href="#i-download"/></svg><span data-i18n="hero.cta">Tải app quầy miễn phí</span></a>
+          <a class="btn btn-outline-light" href="#contact" data-i18n="hero.cta2">Liên hệ dùng thử</a>
         </div>
         <ul class="checks">
           <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="hero.c1">Miễn phí mãi mãi</span></li>
@@ -275,24 +364,39 @@ img.shot:not([src]) { visibility: visible; }
           <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="hero.c3">Không giới hạn máy quầy</span></li>
         </ul>
       </div>
-      <div class="hero-visual">
+      <div class="stage">
         <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-dashboard" src="assets/shots/admin-dashboard.webp" data-i18n-attr="alt:alt.heroAdmin" alt="Trang tổng quan Nano Admin" width="1440" height="900" fetchpriority="high"></div>
         <div class="phone"><img class="shot" data-shot="pos-sale" src="assets/shots/pos-sale.webp" data-i18n-attr="alt:alt.heroPos" alt="Màn bán hàng app quầy NanoPOS" width="720" height="1560"></div>
+        <div class="chip c1" aria-hidden="true"><span class="dot"><svg class="icon"><use href="#i-qr"/></svg></span><span><span data-i18n="hero.chip1">Đã nhận qua VietQR</span><small>286.000đ</small></span></div>
+        <div class="chip c2" aria-hidden="true"><span class="dot"><svg class="icon"><use href="#i-sync"/></svg></span><span><span data-i18n="hero.chip2">Đồng bộ xong</span><small data-i18n="hero.chip2s">Bán lúc mất mạng vẫn đủ đơn</small></span></div>
       </div>
+    </div>
+    <div class="hero-fade"></div>
+  </section>
+
+  <!-- Facts strip (product facts, no invented customer numbers) -->
+  <section class="stats" aria-label="NanoPOS">
+    <div class="wrap">
+      <ul>
+        <li><strong>0đ</strong><span data-i18n="stats.free">App quầy, mãi mãi</span></li>
+        <li><strong>∞</strong><span data-i18n="stats.unlimited">Không giới hạn máy quầy và cửa hàng</span></li>
+        <li><strong>3 <em data-i18n="stats.appsV">ứng dụng</em></strong><span data-i18n="stats.apps">Cùng một dữ liệu</span></li>
+        <li><strong data-i18n="stats.trialV">14 ngày</strong><span data-i18n="stats.trial">Dùng thử gói Chuyên nghiệp</span></li>
+      </ul>
     </div>
   </section>
 
   <!-- Three apps -->
   <section id="apps">
     <div class="wrap">
-      <div class="section-head center">
+      <div class="section-head center" data-reveal>
         <span class="eyebrow" data-i18n="apps.eyebrow">Một gia đình ứng dụng</span>
         <h2 data-i18n="apps.title">Ba ứng dụng, cùng một dữ liệu</h2>
         <p class="lead" data-i18n="apps.lead">Bắt đầu với app quầy miễn phí. Khi cần, mở thêm web quản trị và app quản lý: mọi thứ dùng chung một kho dữ liệu, không phải nhập lại.</p>
       </div>
       <div class="apps">
-        <article class="app-card" data-app="pos">
-          <header><img src="assets/brand/pos.svg" alt="" width="56" height="56"><div><h3>NanoPOS</h3><span class="tag" data-i18n="apps.pos.tag">Miễn phí</span></div></header>
+        <article class="app-card" data-app="pos" data-reveal>
+          <header><img src="assets/brand/pos.svg" alt="" width="58" height="58"><div><h3>NanoPOS</h3><span class="tag" data-i18n="apps.pos.tag">Miễn phí</span></div></header>
           <p class="for" data-i18n="apps.pos.for">App quầy cho thu ngân, trên điện thoại hoặc máy tính bảng.</p>
           <ul>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="apps.pos.b1">Bán nhiều đơn cùng lúc, quét mã vạch</span></li>
@@ -301,8 +405,8 @@ img.shot:not([src]) { visibility: visible; }
           </ul>
           <a class="link-arrow" href="#pos" data-i18n="apps.more">Xem chi tiết →</a>
         </article>
-        <article class="app-card" data-app="manager">
-          <header><img src="assets/brand/manager.svg" alt="" width="56" height="56"><div><h3>Nano Manager</h3><span class="tag paid" data-i18n="apps.paid">Gói trả phí</span></div></header>
+        <article class="app-card" data-app="manager" data-reveal>
+          <header><img src="assets/brand/manager.svg" alt="" width="58" height="58"><div><h3>Nano Manager</h3><span class="tag paid" data-i18n="apps.paid">Gói trả phí</span></div></header>
           <p class="for" data-i18n="apps.manager.for">App quản lý cho chủ cửa hàng, theo dõi và xử lý việc từ xa.</p>
           <ul>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="apps.manager.b1">Doanh thu, lãi gộp hôm nay so với hôm qua</span></li>
@@ -311,8 +415,8 @@ img.shot:not([src]) { visibility: visible; }
           </ul>
           <a class="link-arrow" href="#manager" data-i18n="apps.more">Xem chi tiết →</a>
         </article>
-        <article class="app-card" data-app="admin">
-          <header><img src="assets/brand/admin.svg" alt="" width="56" height="56"><div><h3>Nano Admin</h3><span class="tag paid" data-i18n="apps.paid">Gói trả phí</span></div></header>
+        <article class="app-card" data-app="admin" data-reveal>
+          <header><img src="assets/brand/admin.svg" alt="" width="58" height="58"><div><h3>Nano Admin</h3><span class="tag paid" data-i18n="apps.paid">Gói trả phí</span></div></header>
           <p class="for" data-i18n="apps.admin.for">Web quản trị đầy đủ nhất, làm việc trên máy tính.</p>
           <ul>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="apps.admin.b1">Lãi lỗ, sổ quỹ, công nợ, thuế hộ kinh doanh</span></li>
@@ -328,8 +432,8 @@ img.shot:not([src]) { visibility: visible; }
   <!-- Counter app -->
   <section id="pos" class="soft">
     <div class="wrap showcase">
-      <div>
-        <span class="eyebrow"><img src="assets/brand/pos.svg" alt="" width="22" height="22"><span data-i18n="pos.eyebrow">App quầy NanoPOS · Miễn phí</span></span>
+      <div data-reveal>
+        <span class="eyebrow"><img src="assets/brand/pos.svg" alt="" width="18" height="18"><span data-i18n="pos.eyebrow">App quầy NanoPOS · Miễn phí</span></span>
         <h2 data-i18n="pos.title">Bán nhanh ở quầy, kể cả khi rớt mạng</h2>
         <p class="lead" data-i18n="pos.lead">Đủ mọi thứ một quầy thu ngân cần, không trả đồng nào.</p>
         <div class="features">
@@ -343,7 +447,7 @@ img.shot:not([src]) { visibility: visible; }
           <div class="feature"><span class="badge"><svg class="icon"><use href="#i-chart"/></svg></span><div><h3 data-i18n="pos.f8t">Báo cáo bán hàng</h3><p data-i18n="pos.f8d">Doanh thu, lịch sử đơn và gợi ý combo hay mua kèm.</p></div></div>
         </div>
       </div>
-      <div>
+      <div class="center-col" data-reveal>
         <div class="tabs" role="tablist" aria-label="App quầy" data-i18n-attr="aria-label:aria.posTabs">
           <button type="button" role="tab" aria-selected="true" aria-controls="pos-p1" data-i18n="pos.t1">Bán hàng</button>
           <button type="button" role="tab" aria-selected="false" aria-controls="pos-p2" data-i18n="pos.t2">Giỏ hàng & VietQR</button>
@@ -361,24 +465,28 @@ img.shot:not([src]) { visibility: visible; }
   <!-- Nano Admin -->
   <section id="admin">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow"><img src="assets/brand/admin.svg" alt="" width="22" height="22"><span data-i18n="admin.eyebrow">Nano Admin · Web quản trị</span></span>
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow"><img src="assets/brand/admin.svg" alt="" width="18" height="18"><span data-i18n="admin.eyebrow">Nano Admin · Web quản trị</span></span>
         <h2 data-i18n="admin.title">Sổ sách, kho và tài chính trên một màn hình lớn</h2>
         <p class="lead" data-i18n="admin.lead">Mọi thứ app quầy ghi lại đều về đây. Xem lãi thật sau giá vốn, đối soát chuyển khoản, quản lý kho theo lô và hạn dùng, lập sổ thuế cho hộ kinh doanh.</p>
       </div>
-      <div class="tabs" role="tablist" aria-label="Nano Admin">
-        <button type="button" role="tab" aria-selected="true" aria-controls="adm-p1" data-i18n="admin.t1">Tổng quan</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="adm-p2" data-i18n="admin.t2">Lãi lỗ</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="adm-p3" data-i18n="admin.t3">Tồn kho</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="adm-p4" data-i18n="admin.t4">Sổ quỹ</button>
+      <div class="center-col" data-reveal>
+        <div class="tabs" role="tablist" aria-label="Nano Admin">
+          <button type="button" role="tab" aria-selected="true" aria-controls="adm-p1" data-i18n="admin.t1">Tổng quan</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="adm-p2" data-i18n="admin.t2">Lãi lỗ</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="adm-p3" data-i18n="admin.t3">Tồn kho</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="adm-p4" data-i18n="admin.t4">Sổ quỹ</button>
+        </div>
       </div>
-      <div class="panes">
-        <div class="browser" role="tabpanel" id="adm-p1"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-dashboard" src="assets/shots/admin-dashboard.webp" data-i18n-attr="alt:alt.admDash" alt="Trang tổng quan doanh thu" width="1440" height="900" loading="lazy"></div>
-        <div class="browser" role="tabpanel" id="adm-p2" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-pnl" src="assets/shots/admin-pnl.webp" data-i18n-attr="alt:alt.admPnl" alt="Báo cáo lãi lỗ" width="1440" height="900" loading="lazy"></div>
-        <div class="browser" role="tabpanel" id="adm-p3" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-inventory" src="assets/shots/admin-inventory.webp" data-i18n-attr="alt:alt.admInv" alt="Danh sách tồn kho" width="1440" height="900" loading="lazy"></div>
-        <div class="browser" role="tabpanel" id="adm-p4" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-cashbook" src="assets/shots/admin-cashbook.webp" data-i18n-attr="alt:alt.admCash" alt="Sổ quỹ thu chi" width="1440" height="900" loading="lazy"></div>
+      <div class="frame-stage" data-reveal>
+        <div class="panes">
+          <div class="browser" role="tabpanel" id="adm-p1"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-dashboard" src="assets/shots/admin-dashboard.webp" data-i18n-attr="alt:alt.admDash" alt="Trang tổng quan doanh thu" width="1440" height="900" loading="lazy"></div>
+          <div class="browser" role="tabpanel" id="adm-p2" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-pnl" src="assets/shots/admin-pnl.webp" data-i18n-attr="alt:alt.admPnl" alt="Báo cáo lãi lỗ" width="1440" height="900" loading="lazy"></div>
+          <div class="browser" role="tabpanel" id="adm-p3" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-inventory" src="assets/shots/admin-inventory.webp" data-i18n-attr="alt:alt.admInv" alt="Danh sách tồn kho" width="1440" height="900" loading="lazy"></div>
+          <div class="browser" role="tabpanel" id="adm-p4" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-cashbook" src="assets/shots/admin-cashbook.webp" data-i18n-attr="alt:alt.admCash" alt="Sổ quỹ thu chi" width="1440" height="900" loading="lazy"></div>
+        </div>
       </div>
-      <div class="features three" style="margin-top:48px" id="admin-features">
+      <div class="features three" style="margin-top:64px" id="admin-features" data-reveal>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-chart"/></svg></span><div><h3 data-i18n="admin.f1t">Báo cáo tài chính</h3><p data-i18n="admin.f1d">Doanh thu, cuối ngày, lãi lỗ, theo mặt hàng và theo nhân viên.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-wallet"/></svg></span><div><h3 data-i18n="admin.f2t">Sổ quỹ và đối soát</h3><p data-i18n="admin.f2d">Thu chi, chốt quỹ cuối ca, đối soát tiền chuyển khoản với đơn.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-receipt"/></svg></span><div><h3 data-i18n="admin.f3t">Thuế hộ kinh doanh</h3><p data-i18n="admin.f3d">Ước tính nghĩa vụ thuế theo năm, sổ doanh thu S1a.</p></div></div>
@@ -396,18 +504,18 @@ img.shot:not([src]) { visibility: visible; }
   <!-- Nano Manager -->
   <section id="manager" class="soft">
     <div class="wrap">
-      <div class="section-head center">
-        <span class="eyebrow"><img src="assets/brand/manager.svg" alt="" width="22" height="22"><span data-i18n="manager.eyebrow">Nano Manager · App quản lý</span></span>
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow"><img src="assets/brand/manager.svg" alt="" width="18" height="18"><span data-i18n="manager.eyebrow">Nano Manager · App quản lý</span></span>
         <h2 data-i18n="manager.title">Cửa hàng trong túi áo của chủ</h2>
         <p class="lead" data-i18n="manager.lead">Không cần đứng ở quầy vẫn biết hôm nay bán được bao nhiêu, cái gì sắp hết, ai đang nợ. Và xử lý luôn trên điện thoại.</p>
       </div>
-      <div class="phones">
+      <div class="phones" data-reveal>
         <figure><div class="phone"><img class="shot" data-shot="manager-home" src="assets/shots/manager-home.webp" data-i18n-attr="alt:alt.mgrHome" alt="Trang chủ Nano Manager" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s1">Số liệu hôm nay</figcaption></figure>
         <figure><div class="phone"><img class="shot" data-shot="manager-stocktake" src="assets/shots/manager-stocktake.webp" data-i18n-attr="alt:alt.mgrStock" alt="Kiểm kho bằng camera" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s2">Kiểm kho</figcaption></figure>
         <figure><div class="phone"><img class="shot" data-shot="manager-debt" src="assets/shots/manager-debt.webp" data-i18n-attr="alt:alt.mgrDebt" alt="Công nợ của một khách" width="720" height="2800" loading="lazy"></div><figcaption data-i18n="manager.s3">Công nợ</figcaption></figure>
         <figure><div class="phone"><img class="shot" data-shot="manager-receipt" src="assets/shots/manager-receipt.webp" data-i18n-attr="alt:alt.mgrReceipt" alt="Lập phiếu nhập hàng" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s4">Nhập hàng</figcaption></figure>
       </div>
-      <div class="features three">
+      <div class="features three" data-reveal>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-chart"/></svg></span><div><h3 data-i18n="manager.f1t">Số liệu tức thì</h3><p data-i18n="manager.f1d">Doanh thu, lãi gộp, số đơn so với hôm qua; báo cáo lãi lỗ, sổ quỹ, công nợ.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-bell"/></svg></span><div><h3 data-i18n="manager.f2t">Việc cần chú ý</h3><p data-i18n="manager.f2d">Hàng sắp hết, đơn huỷ, chốt quỹ lệch, máy quầy chưa đồng bộ, nợ quá hạn.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-scan"/></svg></span><div><h3 data-i18n="manager.f3t">Làm việc kho bằng camera</h3><p data-i18n="manager.f3d">Nhập hàng, kiểm kho, trả nhà cung cấp ngay tại kho, kể cả khi mạng chập chờn.</p></div></div>
@@ -419,16 +527,31 @@ img.shot:not([src]) { visibility: visible; }
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section id="pricing">
+  <!-- How to start -->
+  <section id="start">
     <div class="wrap">
-      <div class="section-head center">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow" data-i18n="steps.eyebrow">Bắt đầu</span>
+        <h2 data-i18n="steps.title">Bán được ngay trong 3 bước</h2>
+      </div>
+      <ol class="steps" style="list-style:none;margin:0;padding:0">
+        <li class="step" data-reveal><span class="num">1</span><h3 data-i18n="steps.s1t">Tải app quầy</h3><p data-i18n="steps.s1d">Cài NanoPOS trên điện thoại hoặc máy tính bảng, đăng nhập tài khoản cửa hàng.</p></li>
+        <li class="step" data-reveal><span class="num">2</span><h3 data-i18n="steps.s2t">Thêm hàng và bán</h3><p data-i18n="steps.s2d">Nhập sản phẩm, quét mã vạch, khai tài khoản nhận tiền để khách quét VietQR.</p></li>
+        <li class="step" data-reveal><span class="num">3</span><h3 data-i18n="steps.s3t">Nâng cấp khi cần</h3><p data-i18n="steps.s3d">Cửa hàng lớn lên thì bật Nano Admin và Nano Manager, dữ liệu cũ vẫn nguyên.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="soft">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
         <span class="eyebrow" data-i18n="pricing.eyebrow">Bảng giá</span>
         <h2 data-i18n="pricing.title">Miễn phí để bắt đầu, trả phí khi cần quản lý</h2>
         <p class="lead" data-i18n="pricing.lead">Giá tính theo mỗi cửa hàng, mỗi tháng. Bạn chọn cửa hàng nào dùng gói trả phí.</p>
       </div>
       <div class="plans">
-        <div class="plan">
+        <div class="plan" data-reveal>
           <h3 data-i18n="pricing.free.name">Miễn phí</h3>
           <p class="desc" data-i18n="pricing.free.desc">Cho cửa hàng chỉ cần bán ở quầy.</p>
           <div class="price"><strong data-i18n="pricing.free.price">0đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
@@ -440,7 +563,7 @@ img.shot:not([src]) { visibility: visible; }
           </ul>
           <a class="btn btn-ghost" href="#contact" data-i18n="pricing.free.cta">Tải app quầy</a>
         </div>
-        <div class="plan">
+        <div class="plan" data-reveal>
           <h3 data-i18n="pricing.basic.name">Cơ bản</h3>
           <p class="desc" data-i18n="pricing.basic.desc">Quản lý bán hàng và kho hằng ngày.</p>
           <div class="price"><strong data-i18n="pricing.basic.price">149.000đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
@@ -455,7 +578,7 @@ img.shot:not([src]) { visibility: visible; }
           </ul>
           <a class="btn btn-ghost" href="#contact" data-i18n="pricing.contact">Liên hệ đăng ký</a>
         </div>
-        <div class="plan featured">
+        <div class="plan featured" data-reveal>
           <span class="ribbon" data-i18n="pricing.pro.ribbon">Đầy đủ nhất</span>
           <h3 data-i18n="pricing.pro.name">Chuyên nghiệp</h3>
           <p class="desc" data-i18n="pricing.pro.desc">Đủ sổ sách tài chính, nhập hàng, nhiều cửa hàng.</p>
@@ -469,7 +592,7 @@ img.shot:not([src]) { visibility: visible; }
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f5">Lô và hạn dùng, giá trị tồn, tồn chậm</span></li>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f6">Xem gộp tất cả cửa hàng</span></li>
           </ul>
-          <a class="btn btn-primary" href="#contact" data-i18n="pricing.pro.cta">Liên hệ dùng thử 14 ngày</a>
+          <a class="btn btn-glow" href="#contact" data-i18n="pricing.pro.cta">Liên hệ dùng thử 14 ngày</a>
         </div>
       </div>
       <div class="pricing-notes">
@@ -480,13 +603,14 @@ img.shot:not([src]) { visibility: visible; }
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="soft">
-    <div class="wrap">
-      <div class="section-head center">
+  <section id="faq">
+    <div class="wrap faq-grid">
+      <div class="section-head" data-reveal>
         <span class="eyebrow" data-i18n="faq.eyebrow">Hỏi đáp</span>
         <h2 data-i18n="faq.title">Câu hỏi thường gặp</h2>
+        <p class="lead" data-i18n="faq.lead">Chưa thấy câu trả lời bạn cần? Nhắn cho chúng tôi ở phần liên hệ bên dưới.</p>
       </div>
-      <div class="faq">
+      <div class="faq" data-reveal>
         <details><summary data-i18n="faq.q1">App quầy miễn phí thật à?</summary><p data-i18n="faq.a1">Đúng vậy. App quầy dùng đủ tính năng bán hàng, không giới hạn số máy và số cửa hàng, mỗi cửa hàng có 2 nhân viên. Chỉ web quản trị và app quản lý mới tính phí.</p></details>
         <details><summary data-i18n="faq.q2">Mất mạng thì có bán được không?</summary><p data-i18n="faq.a2">Được. Đơn hàng lưu ngay trên máy quầy và tự đồng bộ lên khi có mạng lại, không mất đơn nào.</p></details>
         <details><summary data-i18n="faq.q3">Khách chuyển khoản thì làm sao?</summary><p data-i18n="faq.a3">App quầy hiện mã VietQR có sẵn số tiền và nội dung đơn. Khách quét bằng app ngân hàng bất kỳ, tiền vào thẳng tài khoản của bạn, NanoPOS không giữ tiền.</p></details>
@@ -499,9 +623,9 @@ img.shot:not([src]) { visibility: visible; }
   </section>
 
   <!-- Contact -->
-  <section id="contact">
+  <section id="contact" style="padding-top:0">
     <div class="wrap">
-      <div class="band">
+      <div class="band" data-reveal>
         <div>
           <h2 data-i18n="contact.title">Bắt đầu bán hàng ngay hôm nay</h2>
           <p data-i18n="contact.lead">Tải app quầy để bán miễn phí. Muốn dùng thử Nano Admin và Nano Manager, hãy liên hệ để chúng tôi kích hoạt cho bạn.</p>
@@ -531,7 +655,11 @@ img.shot:not([src]) { visibility: visible; }
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>© <span id="year">2026</span> NanoPOS</span>
+    <div class="foot-brand">
+      <img src="assets/brand/pos.svg" alt="" width="30" height="30">
+      <span><b>NanoPOS</b> · © <span id="year">2026</span></span>
+    </div>
+    <div class="foot-apps" aria-hidden="true"><img src="assets/brand/pos.svg" alt="" width="26" height="26"><img src="assets/brand/manager.svg" alt="" width="26" height="26"><img src="assets/brand/admin.svg" alt="" width="26" height="26"></div>
     <nav aria-label="Pháp lý" data-i18n-attr="aria-label:aria.legal">
       <a data-site="terms" data-i18n="footer.terms">Điều khoản sử dụng</a>
       <a data-site="privacy" data-i18n="footer.privacy">Chính sách bảo mật</a>
@@ -565,7 +693,15 @@ window.I18N = {
     'nav.apps': 'Apps', 'nav.features': 'Features', 'nav.pricing': 'Pricing', 'nav.faq': 'FAQ', 'nav.contact': 'Contact',
     'nav.cta': 'Get the free app',
     'hero.eyebrow': 'Point of sale for small shops',
-    'hero.title': 'Sell <span class="hl">for free</span>.<br>Manage from anywhere as you grow.',
+    'hero.title': 'Sell <span class="grad">for free</span>.<br>Manage from anywhere as you grow.',
+    'hero.pillTag': 'Free', 'hero.chip1': 'Received via VietQR', 'hero.chip2': 'Sync complete', 'hero.chip2s': 'Orders taken offline are all in',
+    'stats.free': 'Counter app, forever', 'stats.unlimited': 'Unlimited counter devices and shops',
+    'stats.appsV': 'apps', 'stats.apps': 'One set of data', 'stats.trialV': '14 days', 'stats.trial': 'Professional plan trial',
+    'steps.eyebrow': 'Get started', 'steps.title': 'Selling in 3 steps',
+    'steps.s1t': 'Get the counter app', 'steps.s1d': 'Install NanoPOS on a phone or tablet and sign in to your shop account.',
+    'steps.s2t': 'Add products and sell', 'steps.s2d': 'Add products, scan barcodes, set a receiving account so customers can pay by VietQR.',
+    'steps.s3t': 'Upgrade when you need to', 'steps.s3d': 'As the shop grows, turn on Nano Admin and Nano Manager; your existing data stays.',
+    'faq.lead': "Can't find your answer? Message us in the contact section below.",
     'hero.lead': 'The NanoPOS counter app is free, runs on as many devices as you like, keeps selling when the internet drops and takes VietQR bank transfers. When you need inventory, books and multiple shops, add Nano Admin on your computer and Nano Manager on your phone.',
     'hero.cta': 'Get the free counter app', 'hero.cta2': 'Ask for a trial',
     'hero.c1': 'Free forever', 'hero.c2': 'Sells offline', 'hero.c3': 'Unlimited counter devices',
@@ -793,6 +929,17 @@ window.I18N = {
       });
     });
   });
+
+  // Scroll reveal: opt in only when the browser can observe and motion is allowed, so content
+  // is never hidden for no-JS, reduced-motion or headless renders that never scroll.
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.documentElement.classList.add('reveal-on');
+    document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+  }
 
   window.setLang = setLang;
   document.querySelectorAll('[data-lang]').forEach(function (b) {

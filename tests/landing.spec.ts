@@ -240,6 +240,6 @@ test('paid tag text meets AA contrast', async ({ page }) => {
 
 test('hero reuses section shots', async ({ page }) => {
   await page.goto('/index.html')
-  await expect(page.locator('.hero-visual img[src$="admin-dashboard.webp"]')).toHaveCount(1)
-  await expect(page.locator('.hero-visual img[src$="pos-sale.webp"]')).toHaveCount(1)
+  await expect(page.locator('.hero img[src$="admin-dashboard.webp"]')).toHaveCount(1)
+  await expect(page.locator('.hero img[src$="pos-sale.webp"]')).toHaveCount(1)
 })
