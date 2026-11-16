@@ -113,3 +113,35 @@ test('three apps in order', async ({ page }) => {
   const cards = page.locator('#apps [data-app]')
   expect(await cards.evaluateAll(els => els.map(e => e.getAttribute('data-app')))).toEqual(['pos', 'manager', 'admin'])
 })
+
+test('images resolve', async ({ page }) => {
+  await page.goto('/index.html')
+  // Lazy images only load near the viewport; walk the page so every one is requested.
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.body.scrollHeight; y += 600) {
+      window.scrollTo(0, y)
+      await new Promise(r => setTimeout(r, 30))
+    }
+  })
+  // Tab panels are hidden; force their images to load too.
+  await page.evaluate(() => document.querySelectorAll('img[loading="lazy"]').forEach(i => i.setAttribute('loading', 'eager')))
+  const imgs = await page.evaluate(async () => {
+    const all = [...document.querySelectorAll('img')] as HTMLImageElement[]
+    await Promise.all(all.map(i => (i.complete ? null : new Promise(r => { i.onload = i.onerror = r }))))
+    return all.map(i => ({ src: i.getAttribute('src'), alt: i.getAttribute('alt'), ok: i.naturalWidth > 0, shot: i.dataset.shot ?? null }))
+  })
+  expect(imgs.filter(i => !i.src)).toEqual([])
+  expect(imgs.filter(i => !i.ok)).toEqual([])
+  expect(imgs.filter(i => i.shot && !i.alt)).toEqual([])
+})
+
+test('og meta', async ({ page }) => {
+  await page.goto('/index.html')
+  for (const sel of ['meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:description"]', 'meta[name="twitter:card"]']) {
+    await expect(page.locator(sel)).toHaveCount(1)
+  }
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /assets\/og\.png$/)
+  await expect(page.locator('link[rel="icon"]')).toHaveCount(1)
+  const res = await page.request.get('/assets/og.png')
+  expect(res.ok()).toBe(true)
+})

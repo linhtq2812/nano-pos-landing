@@ -34,3 +34,15 @@ bash tests/run.sh
 ## Deploy
 
 Chép nguyên thư mục (bỏ `tests/`, `tools/`) lên bất kỳ host tĩnh nào: GitHub Pages, Cloudflare Pages, Nginx.
+
+## Ảnh giao diện (`assets/shots/`)
+
+Ảnh là giao diện thật trên dữ liệu demo "Tạp hoá Hoa Mai", **chỉ dựng trên Supabase local**:
+
+1. `bash tools/demo/seed.sh`: tạo tài khoản `demo-owner@nanopos.local` / `demo-landing-2026` và shop demo, 75 ngày bán hàng (gọi lại an toàn; `DEMO_RESET=1` để sinh lại đơn). Script từ chối chạy nếu API không phải `http://127.0.0.1:54321`.
+2. `bash tools/shots/web.sh`: Nano Admin (chạy `nano-pos-web` ở cổng 3100 với `NEXT_PUBLIC_SUPABASE_*` ép về local, Playwright chụp 1440×900).
+3. `python3 tools/shots/manager.py`: Nano Manager, lấy từ ảnh golden của `nano-pos-manager`.
+4. `bash tools/shots/pos.sh`: app quầy, dựng bằng `flutter test` (không build, không thiết bị); file test chép tạm vào `nano_pos_flutter/test/` rồi tự xoá.
+5. `node tools/shots/render.mjs tools/shots/og.html assets/og.png 1200 630`: ảnh chia sẻ.
+
+Mỗi lúc chạy một bước: các bước đều nặng (dev server, Flutter).

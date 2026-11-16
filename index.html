@@ -6,6 +6,17 @@
 <title data-i18n="meta.title">NanoPOS: app bán hàng miễn phí, quản lý cửa hàng từ xa</title>
 <meta name="description" data-i18n-attr="content:meta.desc" content="App quầy NanoPOS miễn phí, bán cả khi mất mạng, thu tiền VietQR. Nâng lên Nano Admin và Nano Manager để quản lý kho, tài chính, nhiều cửa hàng.">
 <meta name="theme-color" content="#0F766E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NanoPOS">
+<meta property="og:title" content="NanoPOS: app bán hàng miễn phí, quản lý cửa hàng từ xa">
+<meta property="og:description" content="App quầy miễn phí, bán cả khi mất mạng, thu tiền VietQR. Thêm Nano Admin và Nano Manager khi cần quản lý kho, tài chính, nhiều cửa hàng.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -172,7 +183,7 @@ img.shot:not([src]) { visibility: visible; }
 .faq details p { color: var(--muted); padding-bottom: 18px; margin: 0; }
 
 /* Contact band */
-.band { background: var(--band); color: var(--band-text); border-radius: 24px; padding: 56px 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+.band { background: var(--band); color: var(--band-text); border: 1px solid var(--line); border-radius: 24px; padding: 56px 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
 .band h2 { color: #fff; }
 .band p { color: var(--band-muted); }
 .band .group + .group { margin-top: 22px; }
@@ -249,8 +260,8 @@ img.shot:not([src]) { visibility: visible; }
         </ul>
       </div>
       <div class="hero-visual">
-        <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="hero-admin" data-i18n-attr="alt:alt.heroAdmin" alt="Trang tổng quan Nano Admin" width="1440" height="900" fetchpriority="high"></div>
-        <div class="phone"><img class="shot" data-shot="hero-pos" data-i18n-attr="alt:alt.heroPos" alt="Màn bán hàng app quầy NanoPOS" width="720" height="1560"></div>
+        <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="hero-admin" src="assets/shots/hero-admin.webp" data-i18n-attr="alt:alt.heroAdmin" alt="Trang tổng quan Nano Admin" width="1440" height="900" fetchpriority="high"></div>
+        <div class="phone"><img class="shot" data-shot="hero-pos" src="assets/shots/hero-pos.webp" data-i18n-attr="alt:alt.heroPos" alt="Màn bán hàng app quầy NanoPOS" width="720" height="1560"></div>
       </div>
     </div>
   </section>
@@ -323,9 +334,9 @@ img.shot:not([src]) { visibility: visible; }
           <button type="button" role="tab" aria-selected="false" aria-controls="pos-p4" data-i18n="pos.t4">Báo cáo</button>
         </div>
         <div class="panes phone-stage">
-          <div class="phone" role="tabpanel" id="pos-p1"><img class="shot" data-shot="pos-sale" data-i18n-attr="alt:alt.posSale" alt="Màn bán hàng nhiều đơn" width="720" height="1560" loading="lazy"></div>
-          <div class="phone" role="tabpanel" id="pos-p2" hidden><img class="shot" data-shot="pos-cart" data-i18n-attr="alt:alt.posCart" alt="Giỏ hàng, chọn thanh toán VietQR" width="720" height="1560" loading="lazy"></div>
-          <div class="phone" role="tabpanel" id="pos-p4" hidden><img class="shot" data-shot="pos-report" data-i18n-attr="alt:alt.posReport" alt="Báo cáo doanh thu trên app quầy" width="720" height="1560" loading="lazy"></div>
+          <div class="phone" role="tabpanel" id="pos-p1"><img class="shot" data-shot="pos-sale" src="assets/shots/pos-sale.webp" data-i18n-attr="alt:alt.posSale" alt="Màn bán hàng nhiều đơn" width="720" height="1560" loading="lazy"></div>
+          <div class="phone" role="tabpanel" id="pos-p2" hidden><img class="shot" data-shot="pos-cart" src="assets/shots/pos-cart.webp" data-i18n-attr="alt:alt.posCart" alt="Giỏ hàng, chọn thanh toán VietQR" width="720" height="1560" loading="lazy"></div>
+          <div class="phone" role="tabpanel" id="pos-p4" hidden><img class="shot" data-shot="pos-report" src="assets/shots/pos-report.webp" data-i18n-attr="alt:alt.posReport" alt="Báo cáo doanh thu trên app quầy" width="720" height="1560" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -346,10 +357,10 @@ img.shot:not([src]) { visibility: visible; }
         <button type="button" role="tab" aria-selected="false" aria-controls="adm-p4" data-i18n="admin.t4">Sổ quỹ</button>
       </div>
       <div class="panes">
-        <div class="browser" role="tabpanel" id="adm-p1"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-dashboard" data-i18n-attr="alt:alt.admDash" alt="Trang tổng quan doanh thu" width="1440" height="900" loading="lazy"></div>
-        <div class="browser" role="tabpanel" id="adm-p2" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-pnl" data-i18n-attr="alt:alt.admPnl" alt="Báo cáo lãi lỗ" width="1440" height="900" loading="lazy"></div>
-        <div class="browser" role="tabpanel" id="adm-p3" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-inventory" data-i18n-attr="alt:alt.admInv" alt="Danh sách tồn kho" width="1440" height="900" loading="lazy"></div>
-        <div class="browser" role="tabpanel" id="adm-p4" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-cashbook" data-i18n-attr="alt:alt.admCash" alt="Sổ quỹ thu chi" width="1440" height="900" loading="lazy"></div>
+        <div class="browser" role="tabpanel" id="adm-p1"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-dashboard" src="assets/shots/admin-dashboard.webp" data-i18n-attr="alt:alt.admDash" alt="Trang tổng quan doanh thu" width="1440" height="900" loading="lazy"></div>
+        <div class="browser" role="tabpanel" id="adm-p2" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-pnl" src="assets/shots/admin-pnl.webp" data-i18n-attr="alt:alt.admPnl" alt="Báo cáo lãi lỗ" width="1440" height="900" loading="lazy"></div>
+        <div class="browser" role="tabpanel" id="adm-p3" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-inventory" src="assets/shots/admin-inventory.webp" data-i18n-attr="alt:alt.admInv" alt="Danh sách tồn kho" width="1440" height="900" loading="lazy"></div>
+        <div class="browser" role="tabpanel" id="adm-p4" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-cashbook" src="assets/shots/admin-cashbook.webp" data-i18n-attr="alt:alt.admCash" alt="Sổ quỹ thu chi" width="1440" height="900" loading="lazy"></div>
       </div>
       <div class="features three" style="margin-top:48px">
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-chart"/></svg></span><div><h3 data-i18n="admin.f1t">Báo cáo tài chính</h3><p data-i18n="admin.f1d">Doanh thu, cuối ngày, lãi lỗ, theo mặt hàng và theo nhân viên.</p></div></div>
@@ -374,10 +385,10 @@ img.shot:not([src]) { visibility: visible; }
         <p class="lead" data-i18n="manager.lead">Không cần đứng ở quầy vẫn biết hôm nay bán được bao nhiêu, cái gì sắp hết, ai đang nợ. Và xử lý luôn trên điện thoại.</p>
       </div>
       <div class="phones">
-        <figure><div class="phone"><img class="shot" data-shot="manager-home" data-i18n-attr="alt:alt.mgrHome" alt="Trang chủ Nano Manager" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s1">Số liệu hôm nay</figcaption></figure>
-        <figure><div class="phone"><img class="shot" data-shot="manager-stocktake" data-i18n-attr="alt:alt.mgrStock" alt="Kiểm kho bằng camera" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s2">Kiểm kho</figcaption></figure>
-        <figure><div class="phone"><img class="shot" data-shot="manager-debt" data-i18n-attr="alt:alt.mgrDebt" alt="Công nợ của một khách" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s3">Công nợ</figcaption></figure>
-        <figure><div class="phone"><img class="shot" data-shot="manager-receipt" data-i18n-attr="alt:alt.mgrReceipt" alt="Lập phiếu nhập hàng" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s4">Nhập hàng</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-home" src="assets/shots/manager-home.webp" data-i18n-attr="alt:alt.mgrHome" alt="Trang chủ Nano Manager" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s1">Số liệu hôm nay</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-stocktake" src="assets/shots/manager-stocktake.webp" data-i18n-attr="alt:alt.mgrStock" alt="Kiểm kho bằng camera" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s2">Kiểm kho</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-debt" src="assets/shots/manager-debt.webp" data-i18n-attr="alt:alt.mgrDebt" alt="Công nợ của một khách" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s3">Công nợ</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-receipt" src="assets/shots/manager-receipt.webp" data-i18n-attr="alt:alt.mgrReceipt" alt="Lập phiếu nhập hàng" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s4">Nhập hàng</figcaption></figure>
       </div>
       <div class="features three">
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-chart"/></svg></span><div><h3 data-i18n="manager.f1t">Số liệu tức thì</h3><p data-i18n="manager.f1d">Doanh thu, lãi gộp, số đơn so với hôm qua; báo cáo lãi lỗ, sổ quỹ, công nợ.</p></div></div>
