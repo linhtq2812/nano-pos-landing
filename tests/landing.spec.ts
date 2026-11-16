@@ -89,3 +89,27 @@ test('storage blocked', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   expect(errors).toEqual([])
 })
+
+test('pricing values', async ({ page }) => {
+  await page.goto('/index.html')
+  const pricing = page.locator('#pricing')
+  for (const text of ['0đ', '149.000đ', '249.000đ', '49.000đ']) await expect(pricing).toContainText(text)
+  const staff = await pricing.locator('[data-staff]').allInnerTexts()
+  expect(staff.map(s => s.match(/\d+/)?.[0])).toEqual(['2', '5', '15'])
+  await expect(pricing).toContainText('14 ngày')
+})
+
+test('no forbidden claims', async ({ page }) => {
+  await page.goto('/index.html')
+  const texts = await page.evaluate(() => {
+    const d = (window as any).I18N
+    return [document.body.innerText, JSON.stringify(d.vi), JSON.stringify(d.en)].join('\n')
+  })
+  expect(texts).not.toMatch(/hoá đơn điện tử|hóa đơn điện tử|e-invoice|google sheets|gemini|kiotviet|trợ lý ai|ai assistant/i)
+})
+
+test('three apps in order', async ({ page }) => {
+  await page.goto('/index.html')
+  const cards = page.locator('#apps [data-app]')
+  expect(await cards.evaluateAll(els => els.map(e => e.getAttribute('data-app')))).toEqual(['pos', 'manager', 'admin'])
+})
