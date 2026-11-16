@@ -40,6 +40,7 @@
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+@media (max-width: 960px) { html { scroll-padding-top: 112px; } }
 body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 'Be Vietnam Pro', system-ui, sans-serif; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
@@ -81,7 +82,13 @@ section.soft { background: var(--bg-soft); }
 .lang button { font: inherit; font-size: .8rem; font-weight: 700; padding: 6px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
 .header-cta { min-height: 40px; padding: 0 16px; font-size: .9rem; box-shadow: none; }
-@media (max-width: 960px) { .nav { display: none; } .lang { margin-left: auto; } }
+.mobile-nav { display: none; }
+@media (max-width: 960px) {
+  .nav { display: none; } .lang { margin-left: auto; }
+  .mobile-nav { display: flex; gap: 6px; overflow-x: auto; padding: 0 var(--gutter) 10px; scrollbar-width: none; }
+  .mobile-nav::-webkit-scrollbar { display: none; }
+  .mobile-nav a { flex: none; text-decoration: none; font-size: .85rem; font-weight: 600; color: var(--muted); padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; }
+}
 @media (max-width: 480px) { .header-cta { display: none; } }
 
 /* Hero */
@@ -120,7 +127,7 @@ img.shot:not([src]) { visibility: visible; }
 .app-card header img { width: 56px; height: 56px; }
 .app-card h3 { margin: 0; font-size: 1.25rem; }
 .tag { display: inline-block; font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
-.tag.paid { background: color-mix(in srgb, #F59E0B 16%, transparent); color: #B45309; }
+.tag.paid { background: color-mix(in srgb, #F59E0B 16%, transparent); color: #92400E; }
 @media (prefers-color-scheme: dark) { .tag.paid { color: #FBBF24; } }
 .app-card .for { color: var(--muted); font-size: .95rem; margin: 0; }
 .app-card ul { display: grid; gap: 8px; font-size: .95rem; }
@@ -170,6 +177,8 @@ img.shot:not([src]) { visibility: visible; }
 .plan li .icon { color: var(--accent); width: 18px; height: 18px; margin-top: 3px; }
 .plan li.staff { font-weight: 700; }
 .plan .btn { margin-top: auto; }
+.tier-note { margin: 28px 0 0; color: var(--muted); font-size: .9rem; }
+.tier-note strong { color: var(--text); }
 .pricing-notes { margin-top: 28px; display: grid; gap: 6px; color: var(--muted); font-size: .93rem; text-align: center; }
 @media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
 
@@ -239,6 +248,13 @@ img.shot:not([src]) { visibility: visible; }
     </div>
     <a class="btn btn-primary header-cta" href="#contact" data-i18n="nav.cta">Tải app miễn phí</a>
   </div>
+  <nav class="mobile-nav" aria-label="Chính" data-i18n-attr="aria-label:aria.nav">
+    <a href="#apps" data-i18n="nav.apps">Ứng dụng</a>
+    <a href="#pos" data-i18n="nav.features">Tính năng</a>
+    <a href="#pricing" data-i18n="nav.pricing">Bảng giá</a>
+    <a href="#faq" data-i18n="nav.faq">Hỏi đáp</a>
+    <a href="#contact" data-i18n="nav.contact">Liên hệ</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -251,7 +267,7 @@ img.shot:not([src]) { visibility: visible; }
         <p class="lead" data-i18n="hero.lead">App quầy NanoPOS dùng miễn phí, không giới hạn máy, vẫn bán khi mất mạng và thu tiền bằng VietQR. Khi cần quản lý kho, sổ sách, nhiều cửa hàng, thêm Nano Admin trên máy tính và Nano Manager trên điện thoại.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#contact" data-i18n="hero.cta">Tải app quầy miễn phí</a>
-          <a class="btn btn-ghost" href="#pricing" data-i18n="hero.cta2">Xem bảng giá</a>
+          <a class="btn btn-ghost" href="#contact" data-i18n="hero.cta2">Liên hệ dùng thử</a>
         </div>
         <ul class="checks">
           <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="hero.c1">Miễn phí mãi mãi</span></li>
@@ -260,8 +276,8 @@ img.shot:not([src]) { visibility: visible; }
         </ul>
       </div>
       <div class="hero-visual">
-        <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="hero-admin" src="assets/shots/hero-admin.webp" data-i18n-attr="alt:alt.heroAdmin" alt="Trang tổng quan Nano Admin" width="1440" height="900" fetchpriority="high"></div>
-        <div class="phone"><img class="shot" data-shot="hero-pos" src="assets/shots/hero-pos.webp" data-i18n-attr="alt:alt.heroPos" alt="Màn bán hàng app quầy NanoPOS" width="720" height="1560"></div>
+        <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-dashboard" src="assets/shots/admin-dashboard.webp" data-i18n-attr="alt:alt.heroAdmin" alt="Trang tổng quan Nano Admin" width="1440" height="900" fetchpriority="high"></div>
+        <div class="phone"><img class="shot" data-shot="pos-sale" src="assets/shots/pos-sale.webp" data-i18n-attr="alt:alt.heroPos" alt="Màn bán hàng app quầy NanoPOS" width="720" height="1560"></div>
       </div>
     </div>
   </section>
@@ -362,7 +378,7 @@ img.shot:not([src]) { visibility: visible; }
         <div class="browser" role="tabpanel" id="adm-p3" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-inventory" src="assets/shots/admin-inventory.webp" data-i18n-attr="alt:alt.admInv" alt="Danh sách tồn kho" width="1440" height="900" loading="lazy"></div>
         <div class="browser" role="tabpanel" id="adm-p4" hidden><div class="browser-bar"><i></i><i></i><i></i></div><img class="shot" data-shot="admin-cashbook" src="assets/shots/admin-cashbook.webp" data-i18n-attr="alt:alt.admCash" alt="Sổ quỹ thu chi" width="1440" height="900" loading="lazy"></div>
       </div>
-      <div class="features three" style="margin-top:48px">
+      <div class="features three" style="margin-top:48px" id="admin-features">
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-chart"/></svg></span><div><h3 data-i18n="admin.f1t">Báo cáo tài chính</h3><p data-i18n="admin.f1d">Doanh thu, cuối ngày, lãi lỗ, theo mặt hàng và theo nhân viên.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-wallet"/></svg></span><div><h3 data-i18n="admin.f2t">Sổ quỹ và đối soát</h3><p data-i18n="admin.f2d">Thu chi, chốt quỹ cuối ca, đối soát tiền chuyển khoản với đơn.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-receipt"/></svg></span><div><h3 data-i18n="admin.f3t">Thuế hộ kinh doanh</h3><p data-i18n="admin.f3d">Ước tính nghĩa vụ thuế theo năm, sổ doanh thu S1a.</p></div></div>
@@ -373,6 +389,7 @@ img.shot:not([src]) { visibility: visible; }
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-users"/></svg></span><div><h3 data-i18n="admin.f8t">Nhân viên và nhật ký</h3><p data-i18n="admin.f8d">Phân vai chủ, quản lý, thu ngân. Ai làm gì đều có nhật ký.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-store"/></svg></span><div><h3 data-i18n="admin.f9t">Nhiều cửa hàng</h3><p data-i18n="admin.f9d">Chuyển giữa các cửa hàng, xem gộp số liệu tất cả cửa hàng.</p></div></div>
       </div>
+      <p class="tier-note" data-i18n="admin.tier" data-i18n-html>Lãi lỗ, sổ quỹ, đối soát, thuế, nhập hàng, lô và hạn dùng, giá trị tồn và xem gộp nhiều cửa hàng thuộc gói <strong>Chuyên nghiệp</strong>.</p>
     </div>
   </section>
 
@@ -387,7 +404,7 @@ img.shot:not([src]) { visibility: visible; }
       <div class="phones">
         <figure><div class="phone"><img class="shot" data-shot="manager-home" src="assets/shots/manager-home.webp" data-i18n-attr="alt:alt.mgrHome" alt="Trang chủ Nano Manager" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s1">Số liệu hôm nay</figcaption></figure>
         <figure><div class="phone"><img class="shot" data-shot="manager-stocktake" src="assets/shots/manager-stocktake.webp" data-i18n-attr="alt:alt.mgrStock" alt="Kiểm kho bằng camera" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s2">Kiểm kho</figcaption></figure>
-        <figure><div class="phone"><img class="shot" data-shot="manager-debt" src="assets/shots/manager-debt.webp" data-i18n-attr="alt:alt.mgrDebt" alt="Công nợ của một khách" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s3">Công nợ</figcaption></figure>
+        <figure><div class="phone"><img class="shot" data-shot="manager-debt" src="assets/shots/manager-debt.webp" data-i18n-attr="alt:alt.mgrDebt" alt="Công nợ của một khách" width="720" height="2800" loading="lazy"></div><figcaption data-i18n="manager.s3">Công nợ</figcaption></figure>
         <figure><div class="phone"><img class="shot" data-shot="manager-receipt" src="assets/shots/manager-receipt.webp" data-i18n-attr="alt:alt.mgrReceipt" alt="Lập phiếu nhập hàng" width="720" height="1600" loading="lazy"></div><figcaption data-i18n="manager.s4">Nhập hàng</figcaption></figure>
       </div>
       <div class="features three">
@@ -398,6 +415,7 @@ img.shot:not([src]) { visibility: visible; }
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-store"/></svg></span><div><h3 data-i18n="manager.f5t">Tất cả cửa hàng</h3><p data-i18n="manager.f5d">Đổi cửa hàng trong một chạm, hoặc xem gộp số liệu của cả chuỗi.</p></div></div>
         <div class="feature"><span class="badge"><svg class="icon"><use href="#i-lock"/></svg></span><div><h3 data-i18n="manager.f6t">An toàn</h3><p data-i18n="manager.f6d">Khoá app bằng vân tay, hỏi xác thực lại trước thao tác nhạy cảm.</p></div></div>
       </div>
+      <p class="tier-note" data-i18n="manager.tier" data-i18n-html>Nhập hàng, sổ quỹ, công nợ và xem gộp tất cả cửa hàng thuộc gói <strong>Chuyên nghiệp</strong>; các phần còn lại có từ gói Cơ bản.</p>
     </div>
   </section>
 
@@ -413,7 +431,7 @@ img.shot:not([src]) { visibility: visible; }
         <div class="plan">
           <h3 data-i18n="pricing.free.name">Miễn phí</h3>
           <p class="desc" data-i18n="pricing.free.desc">Cho cửa hàng chỉ cần bán ở quầy.</p>
-          <div class="price"><strong>0đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
+          <div class="price"><strong data-i18n="pricing.free.price">0đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
           <ul>
             <li class="staff" data-staff><svg class="icon"><use href="#i-users"/></svg><span data-i18n="pricing.free.staff">2 nhân viên mỗi cửa hàng</span></li>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.free.f1">App quầy đủ tính năng</span></li>
@@ -425,7 +443,7 @@ img.shot:not([src]) { visibility: visible; }
         <div class="plan">
           <h3 data-i18n="pricing.basic.name">Cơ bản</h3>
           <p class="desc" data-i18n="pricing.basic.desc">Quản lý bán hàng và kho hằng ngày.</p>
-          <div class="price"><strong>149.000đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
+          <div class="price"><strong data-i18n="pricing.basic.price">149.000đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
           <ul>
             <li class="staff" data-staff><svg class="icon"><use href="#i-users"/></svg><span data-i18n="pricing.basic.staff">5 nhân viên mỗi cửa hàng</span></li>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.basic.f1">Mọi thứ của gói Miễn phí</span></li>
@@ -441,7 +459,7 @@ img.shot:not([src]) { visibility: visible; }
           <span class="ribbon" data-i18n="pricing.pro.ribbon">Đầy đủ nhất</span>
           <h3 data-i18n="pricing.pro.name">Chuyên nghiệp</h3>
           <p class="desc" data-i18n="pricing.pro.desc">Đủ sổ sách tài chính, nhập hàng, nhiều cửa hàng.</p>
-          <div class="price"><strong>249.000đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
+          <div class="price"><strong data-i18n="pricing.pro.price">249.000đ</strong><span data-i18n="pricing.unit">/ cửa hàng / tháng</span></div>
           <ul>
             <li class="staff" data-staff><svg class="icon"><use href="#i-users"/></svg><span data-i18n="pricing.pro.staff">15 nhân viên mỗi cửa hàng</span></li>
             <li><svg class="icon"><use href="#i-check"/></svg><span data-i18n="pricing.pro.f1">Mọi thứ của gói Cơ bản</span></li>
@@ -456,7 +474,7 @@ img.shot:not([src]) { visibility: visible; }
       </div>
       <div class="pricing-notes">
         <p style="margin:0" data-i18n="pricing.n1">Dùng thử 14 ngày gói Chuyên nghiệp, không cần trả trước: liên hệ để kích hoạt.</p>
-        <p style="margin:0" data-i18n="pricing.n2">Thêm 5 nhân viên: 49.000đ / cửa hàng / tháng. Hết hạn gói thì cửa hàng lùi về Miễn phí, không bị khoá.</p>
+        <p style="margin:0" data-i18n="pricing.n2">Thêm 5 nhân viên: 49.000đ / cửa hàng / tháng. Hết hạn gói thì cửa hàng lùi về Miễn phí: app quầy vẫn bán bình thường, dữ liệu giữ nguyên.</p>
       </div>
     </div>
   </section>
@@ -486,7 +504,7 @@ img.shot:not([src]) { visibility: visible; }
       <div class="band">
         <div>
           <h2 data-i18n="contact.title">Bắt đầu bán hàng ngay hôm nay</h2>
-          <p data-i18n="contact.lead">Tải app quầy để bán miễn phí. Muốn dùng thử Nano Admin và Nano Manager, hãy liên hệ, chúng tôi kích hoạt cho bạn trong ngày.</p>
+          <p data-i18n="contact.lead">Tải app quầy để bán miễn phí. Muốn dùng thử Nano Admin và Nano Manager, hãy liên hệ để chúng tôi kích hoạt cho bạn.</p>
         </div>
         <div>
           <div class="group">
@@ -538,8 +556,7 @@ window.SITE = Object.assign({
 // (plus the keys below that never appear as element text). English is written out here.
 window.I18N = {
   vi: {
-    'meta.desc': 'App quầy NanoPOS miễn phí, bán cả khi mất mạng, thu tiền VietQR. Nâng lên Nano Admin và Nano Manager để quản lý kho, tài chính, nhiều cửa hàng.',
-    'store.soon': 'Sắp có trên'
+    'store.soon': 'Sắp có trên', 'store.name.android': 'Google Play', 'store.name.ios': 'App Store'
   },
   en: {
     'meta.title': 'NanoPOS: free point-of-sale app, manage your shop from anywhere',
@@ -550,7 +567,7 @@ window.I18N = {
     'hero.eyebrow': 'Point of sale for small shops',
     'hero.title': 'Sell <span class="hl">for free</span>.<br>Manage from anywhere as you grow.',
     'hero.lead': 'The NanoPOS counter app is free, runs on as many devices as you like, keeps selling when the internet drops and takes VietQR bank transfers. When you need inventory, books and multiple shops, add Nano Admin on your computer and Nano Manager on your phone.',
-    'hero.cta': 'Get the free counter app', 'hero.cta2': 'See pricing',
+    'hero.cta': 'Get the free counter app', 'hero.cta2': 'Ask for a trial',
     'hero.c1': 'Free forever', 'hero.c2': 'Sells offline', 'hero.c3': 'Unlimited counter devices',
     'alt.heroAdmin': 'Nano Admin dashboard', 'alt.heroPos': 'NanoPOS counter app sale screen',
     'apps.eyebrow': 'One family of apps',
@@ -612,6 +629,10 @@ window.I18N = {
     'pricing.title': 'Free to start, pay when you need to manage',
     'pricing.lead': 'Prices are per shop, per month. You choose which shops are on a paid plan.',
     'pricing.unit': '/ shop / month',
+    'pricing.free.price': '0đ', 'pricing.basic.price': '149,000đ', 'pricing.pro.price': '249,000đ',
+    'manager.tier': 'Receiving, cash book, debts and the all-shops view are on the <strong>Professional</strong> plan; the rest starts at Basic.',
+    'admin.tier': 'Profit and loss, cash book, reconciliation, tax, purchasing, batches and expiry, stock value and the all-shops view are on the <strong>Professional</strong> plan.',
+    'store.name.android': 'Google Play', 'store.name.ios': 'the App Store',
     'pricing.free.name': 'Free', 'pricing.free.desc': 'For shops that only need to sell at the counter.',
     'pricing.free.staff': '2 staff per shop',
     'pricing.free.f1': 'Full-featured counter app',
@@ -638,7 +659,7 @@ window.I18N = {
     'pricing.pro.f6': 'All shops combined',
     'pricing.pro.cta': 'Contact us for a 14-day trial',
     'pricing.n1': '14-day Professional trial, nothing to pay upfront: contact us to activate it.',
-    'pricing.n2': 'Add 5 staff: 49,000đ / shop / month. When a plan expires the shop drops to Free; it is never locked.',
+    'pricing.n2': 'Add 5 staff: 49,000đ / shop / month. When a plan expires the shop drops to Free: the counter app keeps selling and your data stays.',
     'faq.eyebrow': 'FAQ', 'faq.title': 'Frequently asked questions',
     'faq.q1': 'Is the counter app really free?',
     'faq.a1': 'Yes. The counter app has every selling feature, no limit on devices or shops, and 2 staff per shop. Only the admin web and the manager app are paid.',
@@ -656,7 +677,7 @@ window.I18N = {
     'faq.q6': 'How do I try Nano Admin and Nano Manager?',
     'faq.a6': 'Message us on Zalo or call. We set up your shop and activate a 14-day Professional trial for you.',
     'contact.title': 'Start selling today',
-    'contact.lead': 'Get the counter app to sell for free. To try Nano Admin and Nano Manager, contact us and we will activate it the same day.',
+    'contact.lead': 'Get the counter app to sell for free. To try Nano Admin and Nano Manager, contact us and we will activate it for you.',
     'contact.download': 'Get the counter app', 'contact.talk': 'Trials and subscriptions',
     'store.android': 'Get it on Google Play', 'store.ios': 'Download on the App Store',
     'contact.zalo': 'Message on Zalo', 'contact.phone': 'Call us', 'contact.email': 'Email us',
@@ -689,7 +710,6 @@ window.I18N = {
     });
   });
 
-  var STORE_NAMES = { android: 'Google Play', ios: 'App Store' };
 
   function applySite() {
     var S = window.SITE, dict = I18N[current];
@@ -702,6 +722,8 @@ window.I18N = {
       if (href) { el.setAttribute('href', href); el.hidden = false; }
       else { el.removeAttribute('href'); el.hidden = true; }
     });
+    var legal = document.querySelector('.site-footer nav');
+    if (legal) legal.hidden = !(S.termsUrl || S.privacyUrl);
     var none = document.getElementById('no-contact');
     if (none) none.hidden = !!(S.zaloUrl || S.phone || S.email);
     document.querySelectorAll('[data-store]').forEach(function (el) {
@@ -710,11 +732,13 @@ window.I18N = {
       if (url) {
         el.setAttribute('href', url);
         el.removeAttribute('aria-disabled');
+        el.removeAttribute('role');
         el.textContent = dict['store.' + key];
       } else {
         el.removeAttribute('href');
         el.setAttribute('aria-disabled', 'true');
-        el.textContent = dict['store.soon'] + ' ' + STORE_NAMES[key];
+        el.setAttribute('role', 'link');
+        el.textContent = dict['store.soon'] + ' ' + dict['store.name.' + key];
       }
     });
   }
@@ -741,17 +765,31 @@ window.I18N = {
     store('set', current);
   }
 
-  // Tabs: each tablist switches the panels named by aria-controls.
+  // Tabs (WAI-ARIA tabs pattern): each tablist switches the panels named by aria-controls,
+  // with roving tabindex and Arrow/Home/End keys; panels are labelled by their tab.
   document.querySelectorAll('[role="tablist"]').forEach(function (list) {
-    var tabs = list.querySelectorAll('[role="tab"]');
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        tabs.forEach(function (t) {
-          var on = t === tab;
-          t.setAttribute('aria-selected', String(on));
-          var panel = document.getElementById(t.getAttribute('aria-controls'));
-          if (panel) panel.hidden = !on;
-        });
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+      if (focus) tab.focus();
+    }
+    tabs.forEach(function (tab, i) {
+      var panel = document.getElementById(tab.getAttribute('aria-controls'));
+      tab.id = tab.id || tab.getAttribute('aria-controls') + '-tab';
+      if (panel) panel.setAttribute('aria-labelledby', tab.id);
+      tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1;
+      tab.addEventListener('click', function () { select(tab, false); });
+      tab.addEventListener('keydown', function (e) {
+        var next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (next === undefined) return;
+        e.preventDefault();
+        select(tabs[(next + tabs.length) % tabs.length], true);
       });
     });
   });

@@ -5,7 +5,8 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 db_repo="${NANO_POS_DB:-$here/../../../nano-pos-db}"
-status="$(cd "$db_repo" && supabase status -o json 2>/dev/null)"
+status="$(cd "$db_repo" && supabase status -o json 2>/dev/null)" \
+  || { echo "supabase status failed: start local Supabase in $db_repo first (supabase start)" >&2; exit 1; }
 api="$(python3 -c 'import json,sys;print(json.load(sys.stdin)["API_URL"])' <<<"$status")"
 key="$(python3 -c 'import json,sys;print(json.load(sys.stdin)["SERVICE_ROLE_KEY"])' <<<"$status")"
 if [ "$api" != "http://127.0.0.1:54321" ]; then
@@ -17,7 +18,7 @@ password="${DEMO_PASSWORD:-demo-landing-2026}"
 # Create the owner through the Auth admin API (idempotent: 422 = already exists).
 curl -s -o /dev/null -w '%{http_code}\n' -X POST "$api/auth/v1/admin/users" \
   -H "apikey: $key" -H "Authorization: Bearer $key" -H 'Content-Type: application/json' \
-  -d "{\"email\":\"$email\",\"password\":\"$password\",\"email_confirm\":true}" | grep -qE '^(200|201|422)$' \
+  -d "$(EMAIL="$email" PASSWORD="$password" python3 -c 'import json,os;print(json.dumps({"email":os.environ["EMAIL"],"password":os.environ["PASSWORD"],"email_confirm":True}))')" | grep -qE '^(200|201|422)$' \
   || { echo "could not create $email" >&2; exit 1; }
 
 if [ "${DEMO_RESET:-0}" = 1 ]; then

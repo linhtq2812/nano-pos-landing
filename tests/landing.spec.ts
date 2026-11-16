@@ -176,3 +176,70 @@ test('faq answers where data lives', async ({ page }) => {
   await expect(page.locator('#faq')).toContainText('Dữ liệu')
   await expect(page.locator('#faq details')).toHaveCount(7)
 })
+
+test('tabs follow the aria tab pattern', async ({ page }) => {
+  await page.goto('/index.html')
+  const list = page.locator('#admin [role="tablist"]')
+  const tabs = list.locator('[role="tab"]')
+  await expect(tabs.nth(0)).toHaveAttribute('tabindex', '0')
+  await expect(tabs.nth(1)).toHaveAttribute('tabindex', '-1')
+  for (const panel of await page.locator('#admin [role="tabpanel"]').all()) {
+    const by = await panel.getAttribute('aria-labelledby')
+    expect(by).toBeTruthy()
+    await expect(page.locator(`#${by}`)).toHaveAttribute('role', 'tab')
+  }
+  await tabs.nth(0).focus()
+  await page.keyboard.press('ArrowRight')
+  await expect(tabs.nth(1)).toBeFocused()
+  await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true')
+  await page.keyboard.press('End')
+  await expect(tabs.last()).toBeFocused()
+  await page.keyboard.press('ArrowRight')
+  await expect(tabs.first()).toBeFocused()
+})
+
+test('empty legal nav is hidden', async ({ page }) => {
+  await page.goto('/index.html')
+  await expect(page.locator('.site-footer nav')).toHaveAttribute('hidden', '')
+})
+
+test('mobile has an in-page nav', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 })
+  await page.goto('/index.html')
+  const link = page.locator('.mobile-nav a[href="#pricing"]')
+  await expect(link).toBeVisible()
+  const { sw, cw } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }))
+  expect(sw).toBeLessThanOrEqual(cw)
+})
+
+test('english prices use english number format', async ({ page }) => {
+  await page.goto('/index.html')
+  await page.locator('[data-lang="en"]').first().click()
+  const pricing = page.locator('#pricing')
+  for (const text of ['149,000đ', '249,000đ', '49,000đ']) await expect(pricing).toContainText(text)
+  await expect(pricing).not.toContainText('149.000đ')
+  await expect(page.locator('[data-store="ios"]').first()).toContainText('the App Store')
+})
+
+test('paid tag text meets AA contrast', async ({ page }) => {
+  await page.goto('/index.html')
+  const ratio = await page.locator('.tag.paid').first().evaluate(el => {
+    const rgb = (c: string) => (c.match(/[\d.]+/g) ?? []).slice(0, 4).map(Number)
+    const lum = ([r, g, b]: number[]) => {
+      const f = (v: number) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4 }
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+    }
+    const fg = rgb(getComputedStyle(el).color)
+    const [r, g, b, a = 1] = rgb(getComputedStyle(el).backgroundColor)
+    const bg = [r, g, b].map(v => v * a + 255 * (1 - a)) // tag sits on a white card
+    const [l1, l2] = [lum(fg), lum(bg)].sort((x, y) => y - x)
+    return (l1 + 0.05) / (l2 + 0.05)
+  })
+  expect(ratio).toBeGreaterThanOrEqual(4.5)
+})
+
+test('hero reuses section shots', async ({ page }) => {
+  await page.goto('/index.html')
+  await expect(page.locator('.hero-visual img[src$="admin-dashboard.webp"]')).toHaveCount(1)
+  await expect(page.locator('.hero-visual img[src$="pos-sale.webp"]')).toHaveCount(1)
+})
